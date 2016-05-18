@@ -1,0 +1,58 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.ConnectionFragment">
+
+    <LinearLayout
+        android:id="@+id/switchSessionLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/activeSessionButton"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:text="Active" />
+
+        <Button
+            android:id="@+id/failedSessionButton"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_weight="1"
+            android:text="Failed" />
+    </LinearLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshSessionActiveLayout"
+        android:layout_below="@id/switchSessionLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/sessionActiveRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+  <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshSessionFailedLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+      android:layout_below="@id/swipeRefreshSessionActiveLayout">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/sessionFailedRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+</RelativeLayout>

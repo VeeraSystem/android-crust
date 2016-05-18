@@ -1,0 +1,60 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.ConnectionFragment">
+
+    <LinearLayout
+        android:id="@+id/switchLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/activeButton"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:text="Active" />
+
+        <Button
+            android:id="@+id/failedButton"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_weight="1"
+            android:text="Failed" />
+    </LinearLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshConnectionActiveLayout"
+        android:layout_below="@id/switchLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/connectionActiveRecyclerView"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+     <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshConnectionFailedLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         android:layout_below="@id/swipeRefreshConnectionActiveLayout">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/connectionFailedRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+</RelativeLayout>
