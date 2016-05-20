@@ -73,7 +73,7 @@ public class ActiveSessionAdapter extends RecyclerView.Adapter<ActiveSessionAdap
         holder.remoteUserTextView.setText(sessionListModels.get(position).getmRemoteUser());
         holder.pIdTextView.setText("PID: " + String.valueOf(sessionListModels.get(position).getmPid()));
         holder.stateTextView.setText(sessionListModels.get(position).getmFailReason());
-        holder.sessionConnectionTextView.setText(sessionListModels.get(position).getmServerAccount());
+        holder.sessionConnectionTextView.setText(sessionListModels.get(position).getmServerAccount()+"@"+sessionListModels.get(position).getmServer());
 
         holder.killSessionButton.setOnClickListener(new View.OnClickListener() {
             @Override
