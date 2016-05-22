@@ -37,12 +37,11 @@ public class FilterDialogFragment extends android.support.v4.app.DialogFragment 
     private EditText sourceIPFilterEditText;
     private EditText remoteUserFilterEditText;
     private EditText serverFilterEditText;
-    private EditText serverGroupFilterEditText;
 
     private OnFilterListener callback;
 
     public interface OnFilterListener {
-        public void onFilterAdded(String sourceIp, String remoteUser, String server, String serverGroup);
+        void onFilterAdded(String sourceIp, String remoteUser, String server);
     }
 
     @Override
@@ -71,14 +70,13 @@ public class FilterDialogFragment extends android.support.v4.app.DialogFragment 
         sourceIPFilterEditText = (EditText) view.findViewById(R.id.filterSourceIp);
         remoteUserFilterEditText = (EditText) view.findViewById(R.id.filterRemoteUser);
         serverFilterEditText = (EditText) view.findViewById(R.id.filterServer);
-        serverGroupFilterEditText = (EditText) view.findViewById(R.id.filterServerGroup);
 
         filterBuilder.setView(view)
                 .setPositiveButton("Filter", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         callback.onFilterAdded(sourceIPFilterEditText.getText().toString(),remoteUserFilterEditText.getText().toString(),
-                                serverFilterEditText.getText().toString(),serverGroupFilterEditText.getText().toString());
+                                serverFilterEditText.getText().toString());
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

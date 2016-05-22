@@ -32,14 +32,20 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.google.gson.Gson;
 import com.veerasystem.crust.Adapter.ActiveSessionAdapter;
 import com.veerasystem.crust.Adapter.FailedSessionAdapter;
+import com.veerasystem.crust.CrustServiceAPI;
 import com.veerasystem.crust.MainActivity;
 import com.veerasystem.crust.Model.ActiveSessionModel;
 import com.veerasystem.crust.Model.FailedSessionModel;
 import com.veerasystem.crust.R;
 
 import java.util.List;
+
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SessionFragment extends Fragment implements FilterDialogFragment.OnFilterListener{
 
@@ -196,7 +202,7 @@ public class SessionFragment extends Fragment implements FilterDialogFragment.On
         filterActiveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                filterDialogFragment.show(getActivity().getSupportFragmentManager(), "FilterTag");
+                filterDialogFragment.show(getActivity().getSupportFragmentManager(), "Filter");
             }
         });
 
@@ -204,8 +210,9 @@ public class SessionFragment extends Fragment implements FilterDialogFragment.On
     }
 
     @Override
-    public void onFilterAdded(String sourceIp, String remoteUser, String server, String serverGroup) {
-        Log.d("crust", sourceIp+remoteUser+server+serverGroup);
-
+    public void onFilterAdded(String sourceIp, String remoteUser, String server) {
+        ((MainActivity) getActivity()).getFilteredActiveSessionList(sourceIp, remoteUser, server);
     }
+
+
 }

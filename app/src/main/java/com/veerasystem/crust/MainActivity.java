@@ -308,6 +308,37 @@ public class MainActivity extends AppCompatActivity
         loadServerGroupChartData();
     }
 
+     public void getFilteredActiveSessionList(String sourceIp, String remoteUser, String server) {
+         Log.d("Crust",remoteUser);
+         Observable<ResponseBody> activeSessionList = crustService.filterActiveSessions(tokenID, 1, sourceIp, remoteUser, server);
+         activeSessionList.subscribeOn(Schedulers.newThread())
+                 .observeOn(AndroidSchedulers.mainThread())
+                 .subscribe(new Subscriber<ResponseBody>() {
+                     @Override
+                     public void onCompleted() {
+
+                     }
+
+                     @Override
+                     public void onError(Throwable e) {
+
+                     }
+
+                     @Override
+                     public void onNext(ResponseBody responseBody) {
+                         try {
+                             ActiveSessionModel activeSessionModel = gson.fromJson(responseBody.string(), ActiveSessionModel.class);
+                             List<ActiveSessionModel.Result> itemsData;
+                             itemsData = activeSessionModel.getsResult();
+
+                             sessionFragment.updateListActive(itemsData);
+                         } catch (IOException e) {
+                             e.printStackTrace();
+                         }
+                     }
+                 });
+    }
+
     public void getActiveConnectionList() {
         Observable<ResponseBody> activeConnectionList = crustService.activeConnections(tokenID, 1, 1, 10);
         activeConnectionList.subscribeOn(Schedulers.newThread())

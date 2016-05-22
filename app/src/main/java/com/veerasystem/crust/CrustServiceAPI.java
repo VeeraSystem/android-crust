@@ -61,6 +61,15 @@ public interface CrustServiceAPI {
             @Query("page_size") int page_size
     );
 
+    @GET("crustsessions/")
+    Observable<ResponseBody> filterActiveSessions(
+            @Header("Authorization") String token,
+            @Query("active") int active,
+            @Query("client_ip") String sourceIP,
+            @Query("remoteuser") String remoteUser,
+            @Query("server") String server
+    );
+
     @GET("crustsessions/usersfailcount/")
     Observable<ResponseBody> failedSessions(
             @Header("Authorization") String token

@@ -1,37 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="16"
-    >
+    android:orientation="vertical"
+    android:weightSum="16">
 
-        <EditText
-            android:id="@+id/filterSourceIp"
-            android:hint="Source IP"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/filterSourceIp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="Source IP" />
 
-        <EditText
-            android:id="@+id/filterRemoteUser"
-            android:hint="Remote User"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/filterRemoteUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="Remote User" />
 
     <EditText
         android:id="@+id/filterServer"
-        android:hint="Server"
-        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <EditText
-        android:id="@+id/filterServerGroup"
-        android:hint="Server Group"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
+        android:hint="Server" />
 
 </LinearLayout>
