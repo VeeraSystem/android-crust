@@ -1,11 +1,10 @@
 /*************************************************************************
- *
  * Veera CONFIDENTIAL
  * __________________
- *
- *  [2016] Veera System Incorporated
- *  All Rights Reserved.
- *
+ * <p/>
+ * [2016] Veera System Incorporated
+ * All Rights Reserved.
+ * <p/>
  * NOTICE:  All information contained herein is, and remains
  * the property of Veera System Incorporated and its suppliers,
  * if any.  The intellectual and technical concepts contained
@@ -22,13 +21,16 @@ package com.veerasystem.crust.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.veerasystem.crust.Adapter.ActiveSessionAdapter;
 import com.veerasystem.crust.Adapter.FailedSessionAdapter;
@@ -39,7 +41,9 @@ import com.veerasystem.crust.R;
 
 import java.util.List;
 
-public class SessionFragment extends Fragment{
+public class SessionFragment extends Fragment implements FilterDialogFragment.OnFilterListener{
+
+    FilterDialogFragment filterDialogFragment;
 
     private ActiveSessionAdapter activeSessionAdapter;
     private FailedSessionAdapter failedSessionAdapter;
@@ -55,6 +59,8 @@ public class SessionFragment extends Fragment{
 
     private Button activeButton;
     private Button failedButton;
+
+    private ImageButton filterActiveButton;
 
     public SessionFragment() {
         // Required empty public constructor
@@ -183,6 +189,23 @@ public class SessionFragment extends Fragment{
         failedButton.setTextColor(Color.GRAY);
         failedButton.setShadowLayer(1, 0, 1, Color.DKGRAY);
 
+        filterDialogFragment = new FilterDialogFragment();
+        filterDialogFragment.setTargetFragment(this, 0);
+
+        filterActiveButton = (ImageButton) rootView.findViewById(R.id.filterActiveSessionButton);
+        filterActiveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                filterDialogFragment.show(getActivity().getSupportFragmentManager(), "FilterTag");
+            }
+        });
+
         return rootView;
+    }
+
+    @Override
+    public void onFilterAdded(String sourceIp, String remoteUser, String server, String serverGroup) {
+        Log.d("crust", sourceIp+remoteUser+server+serverGroup);
+
     }
 }
