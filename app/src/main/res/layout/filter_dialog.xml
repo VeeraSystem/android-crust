@@ -5,25 +5,58 @@
     android:orientation="vertical"
     android:weightSum="16">
 
-    <EditText
-        android:id="@+id/filterSourceIp"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:hint="Source IP" />
+        android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/filterRemoteUser"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="   Source IP         "
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/filterSourceIp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:hint="Remote User" />
+        android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/filterServer"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="   Remote User   "
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/filterRemoteUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:hint="Server" />
+        android:orientation="horizontal">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="   Server               "
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/filterServer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
 </LinearLayout>
