@@ -19,6 +19,7 @@
 
 package com.veerasystem.crust;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -41,6 +42,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.os.Handler;
 
 import rx.Observable;
 
@@ -233,15 +236,31 @@ public class MainActivity extends AppCompatActivity
         return super.onKeyUp(keyCode, objEvent);
     }
 
+    Boolean doubleExitPressed = false;
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-//            super.onBackPressed();
-            finish(); //We shouldn't use finish, use Intent to go Home instead
-            System.exit(0);
+            if (doubleExitPressed) {
+                Intent exitIntent = new Intent(Intent.ACTION_MAIN);
+                exitIntent.addCategory(Intent.CATEGORY_HOME);
+                exitIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(exitIntent);
+            }
+            else {
+                Toast.makeText(this,"Press back one more time to exit", Toast.LENGTH_LONG).show();
+                doubleExitPressed = true;
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        doubleExitPressed = false;
+                    }
+                }, 2000);
+            }
         }
     }
 
