@@ -168,6 +168,28 @@ public class MainActivity extends AppCompatActivity
         headerUserInfoTextView.setText(username);
 
         navigationView.setNavigationItemSelectedListener(this);
+
+        TextView signout = (TextView) findViewById(R.id.signout_menu);
+        signout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logoutUser();
+
+                SharedPreferences pref = getApplicationContext().getSharedPreferences("CRUST", 0);
+                final SharedPreferences.Editor editor = pref.edit();
+                editor.remove("TOKEN");
+                editor.commit();
+
+
+
+                Intent i = getBaseContext().getPackageManager()
+                        .getLaunchIntentForPackage( getBaseContext().getPackageName() );
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+
+
+            }
+        });
     }
 
     //Change The Backgournd Color of Tabs
@@ -686,6 +708,31 @@ public class MainActivity extends AppCompatActivity
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+                    }
+                });
+    }
+
+    public void logoutUser() {
+        Log.d("Crsut","Calling Logout");
+        Observable<ResponseBody> logoutResponce = crustService.logout(tokenID);
+        logoutResponce.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<ResponseBody>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(ResponseBody responseBody) {
+
+                        Log.d("Logout State", responseBody.toString());
+
                     }
                 });
     }

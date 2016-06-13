@@ -43,6 +43,11 @@ public interface CrustServiceAPI {
             @Field("password") String password
     );
 
+    @POST("auth/logout/")
+    Observable<ResponseBody> logout(
+            @Header("Authorization") String token
+    );
+
     @GET("remoteconnections/")
     Observable<ResponseBody> activeConnections(
             @Header("Authorization") String token,
