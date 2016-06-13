@@ -61,6 +61,7 @@ import com.veerasystem.crust.Model.ServerGroupCountModel;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -310,7 +311,17 @@ public class MainActivity extends AppCompatActivity
 
      public void getFilteredActiveSessionList(String sourceIp, String remoteUser, String server) {
          Log.d("Crust",remoteUser);
-         Observable<ResponseBody> activeSessionList = crustService.filterActiveSessions(tokenID, 1, sourceIp, remoteUser, server);
+
+         HashMap<String, String> parameters = new HashMap<String, String>();
+
+         if (!sourceIp.isEmpty())
+             parameters.put("client_ip",sourceIp);
+         if (!remoteUser.isEmpty())
+             parameters.put("remoteuser", remoteUser);
+         if (!server.isEmpty())
+             parameters.put("server", server);
+
+         Observable<ResponseBody> activeSessionList = crustService.filterActiveSessions(tokenID, 1, parameters);
          activeSessionList.subscribeOn(Schedulers.newThread())
                  .observeOn(AndroidSchedulers.mainThread())
                  .subscribe(new Subscriber<ResponseBody>() {

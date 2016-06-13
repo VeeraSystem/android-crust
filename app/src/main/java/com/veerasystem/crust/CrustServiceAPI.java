@@ -20,6 +20,8 @@
 package com.veerasystem.crust;
 
 
+import java.util.HashMap;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -29,6 +31,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 import rx.Observable;
 
 public interface CrustServiceAPI {
@@ -65,9 +68,7 @@ public interface CrustServiceAPI {
     Observable<ResponseBody> filterActiveSessions(
             @Header("Authorization") String token,
             @Query("active") int active,
-            @Query("client_ip") String sourceIP,
-            @Query("remoteuser") String remoteUser,
-            @Query("server") String server
+            @QueryMap HashMap<String, String> parameters
     );
 
     @GET("crustsessions/usersfailcount/")
