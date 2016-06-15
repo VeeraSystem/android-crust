@@ -46,15 +46,22 @@ public class LoginActivity extends AppCompatActivity {
     EditText serverAddress;
     EditText usernameEditText;
     EditText passwordEditText;
+    EditText otpEditText;
+
+    Button otpButton;
     Button loginButton;
+    CrustServiceAPI crustService;
+    Gson gson;
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("CRUST", 0);
-        final SharedPreferences.Editor editor = pref.edit();
+        pref = getApplicationContext().getSharedPreferences("CRUST", 0);
+        editor = pref.edit();
 
         if (!pref.getString("TOKEN", "").isEmpty()) {
             Intent main = new Intent(LoginActivity.this, MainActivity.class);
@@ -66,6 +73,8 @@ public class LoginActivity extends AppCompatActivity {
         serverAddress = (EditText) findViewById(R.id.serverAddress);
         usernameEditText = (EditText) findViewById(R.id.username);
         passwordEditText = (EditText) findViewById(R.id.password);
+        otpEditText = (EditText) findViewById(R.id.otp);
+        otpButton = (Button) findViewById(R.id.otpButton);
         loginButton = (Button) findViewById(R.id.loginButton);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -79,50 +88,92 @@ public class LoginActivity extends AppCompatActivity {
                     .build();
 
 
-                final Gson gson = new Gson();
+                gson = new Gson();
 
-                CrustServiceAPI crustService = retrofit.create(CrustServiceAPI.class);
+                crustService = retrofit.create(CrustServiceAPI.class);
+                getOTP();
 
-                Observable<ResponseBody> loginResponse = crustService.login(usernameEditText.getText().toString(), passwordEditText.getText().toString());
-                loginResponse.subscribeOn(Schedulers.newThread())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Subscriber<ResponseBody>() {
-                            @Override
-                            public void onCompleted() {
-
-                            }
-
-                            @Override
-                            public void onError(Throwable e) {
-
-                            }
-
-                            @Override
-                            public void onNext(ResponseBody responseBody) {
-                                try {
-                                    TokenModel model = gson.fromJson(responseBody.string(), TokenModel.class);
-
-                                    Intent main = new Intent(LoginActivity.this, MainActivity.class);
-//
-//                                    //Sending Token and serverAddress to mainActivity
-//                                    main.putExtra("TOKEN",model.getToken());
-//                                    main.putExtra("SERVERADDRESS", serverAddress.getText().toString());
-
-                                    editor.putString("Username", usernameEditText.getText().toString());
-                                    editor.putString("TOKEN","Token "+model.getToken());
-                                    editor.putString("SERVERADDRESS", serverAddress.getText().toString());
-                                    editor.commit();
-
-                                    startActivity(main);
-
-                                    //We need to finish this activity so pressing back on MainActivity wouldn't return to this activity
-                                    finish();
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        });
             }
         });
+
+        otpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                login();
+            }
+        });
+    }
+
+    public void getOTP() {
+        Observable<ResponseBody> loginResponse = crustService.loginOtpRequest(usernameEditText.getText().toString(), passwordEditText.getText().toString());
+        loginResponse.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<ResponseBody>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(ResponseBody responseBody) {
+                        try {
+                            Log.d("Crust",responseBody.string());
+
+                            serverAddress.setVisibility(View.GONE);
+                            usernameEditText.setVisibility(View.GONE);
+                            passwordEditText.setVisibility(View.GONE);
+                            loginButton.setVisibility(View.GONE);
+                            otpEditText.setVisibility(View.VISIBLE);
+                            otpButton.setVisibility(View.VISIBLE);
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+    }
+
+    public void login() {
+        Observable<ResponseBody> loginResponse = crustService.login(usernameEditText.getText().toString(), passwordEditText.getText().toString(), otpEditText.getText().toString());
+        loginResponse.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<ResponseBody>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(ResponseBody responseBody) {
+                        try {
+                            TokenModel model = gson.fromJson(responseBody.string(), TokenModel.class);
+
+                            Intent main = new Intent(LoginActivity.this, MainActivity.class);
+
+                            editor.putString("Username", usernameEditText.getText().toString());
+                            editor.putString("TOKEN","Token "+model.getToken());
+                            editor.putString("SERVERADDRESS", serverAddress.getText().toString());
+                            editor.commit();
+
+                            startActivity(main);
+
+                            //We need to finish this activity so pressing back on MainActivity wouldn't return to this activity
+                            finish();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
     }
 }

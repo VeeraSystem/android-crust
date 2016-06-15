@@ -37,10 +37,18 @@ import rx.Observable;
 public interface CrustServiceAPI {
 
     @FormUrlEncoded
-    @POST("auth/obtain-token/")
-    Observable<ResponseBody> login(
+    @POST("auth/otpbysms/")
+    Observable<ResponseBody> loginOtpRequest(
             @Field("username") String username,
             @Field("password") String password
+    );
+
+    @FormUrlEncoded
+    @POST("auth/otptoken/")
+    Observable<ResponseBody> login(
+            @Field("username") String username,
+            @Field("password") String password,
+            @Field("otp") String otp
     );
 
     @POST("auth/logout/")

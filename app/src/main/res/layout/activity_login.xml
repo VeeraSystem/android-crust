@@ -62,6 +62,38 @@
         android:text="master"
         android:textSize="15sp" />
 
+    <EditText
+        android:id="@+id/otp"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+          android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
+
+        android:layout_below="@id/password"
+
+        android:hint="OTP"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textSize="25sp" />
+
+
+    <Button
+        android:id="@+id/otpButton"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:text="Login OTP"
+
+        android:textSize="15sp" />
 
     <Button
         android:id="@+id/loginButton"
