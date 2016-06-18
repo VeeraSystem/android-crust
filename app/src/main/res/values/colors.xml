@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2C3549</color>
-    <color name="colorPrimaryDark">#2C3549</color>
-    <color name="textColorPrimary">#FFFFFF</color>
+    <color name="colorPrimary">#607D8B</color>
+    <color name="colorPrimaryDark">#455A64</color>
+    <color name="textColorPrimary">#212121</color>
     <color name="windowBackground">#FFFFFF</color>
     <color name="navigationBarColor">#ffffff</color>
-    <color name="colorAccent">#c8e8ff</color>
-    <color name="listItem">#7B869A</color>
+    <color name="colorAccent">#FFC107</color>
+    <color name="listItem">#CFD8DC</color>
 
-
-    <!--<color name="colorPrimary">#125688</color>-->
-    <!--<color name="colorPrimaryDark">#125688</color>-->
-    <!--<color name="textColorPrimary">#FFFFFF</color>-->
-    <!--<color name="windowBackground">#FFFFFF</color>-->
-    <!--<color name="navigationBarColor">#000000</color>-->
-    <!--<color name="colorAccent">#c8e8ff</color>-->
+    <color name="box4">#e4d9c7</color>
+    <color name="itemListTextColor_dark">#607D8B</color>
+    <color name="itemListTextColor_light">#8b9ba3</color>
+    <color name="buttonTextColor">#ffffff</color>
 </resources>

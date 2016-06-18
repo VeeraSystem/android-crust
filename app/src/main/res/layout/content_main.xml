@@ -20,32 +20,34 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:orientation="horizontal"
             android:weightSum="4">
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+
+                android:layout_height="50dp"
                 android:layout_weight="1"
-                android:background="#fe5341"
+                android:background="@color/box4"
                 android:orientation="vertical">
 
-                <Button
+                <TextView
                     android:id="@+id/serverGroupsCountButton"
-                    style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textColor="#ffffff"
-                    android:textSize="29sp" />
+                    android:layout_height="25dp"
+                    android:gravity="center|bottom"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp" />
+
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="8dp"
+                    android:layout_height="25dp"
                     android:gravity="center"
                     android:text="Server Group"
-                    android:textColor="#ffffff" />
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -57,25 +59,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#fe5341"
+                android:background="@color/box4"
                 android:orientation="vertical">
 
-                <Button
+                <TextView
                     android:id="@+id/serversCountButton"
-                    style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-
-                    android:textColor="#ffffff"
-                    android:textSize="29sp" />
+                    android:layout_height="25dp"
+                    android:textColor="@color/colorPrimary"
+                    android:gravity="center|bottom"
+                    android:textSize="15sp" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="8dp"
+                    android:layout_height="25dp"
                     android:gravity="center"
                     android:text="Server"
-                    android:textColor="#ffffff" />
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -87,24 +88,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#fe5341"
+                android:background="@color/box4"
                 android:orientation="vertical">
 
-                <Button
+                <TextView
                     android:id="@+id/serverAccountsCountButton"
-                    style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textColor="#ffffff"
-                    android:textSize="29sp" />
+                    android:layout_height="25dp"
+                    android:gravity="center|bottom"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="8dp"
+                    android:layout_height="25dp"
                     android:gravity="center"
-                    android:text="Server Acc"
-                    android:textColor="#ffffff" />
+                    android:text="Server Account"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -116,24 +117,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#fe5341"
+                android:background="@color/box4"
                 android:orientation="vertical">
 
-                <Button
+                <TextView
                     android:id="@+id/remoteUsersCountButton"
-                    style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textColor="#ffffff"
-                    android:textSize="29sp" />
+                    android:layout_height="25dp"
+                    android:gravity="center|bottom"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="8dp"
+                    android:layout_height="25dp"
                     android:gravity="center"
                     android:text="Remote User"
-                    android:textColor="#ffffff" />
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -150,7 +151,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#434e64"
+            android:background="@color/colorPrimaryDark"
             android:orientation="vertical">
 
             <android.support.design.widget.TabLayout

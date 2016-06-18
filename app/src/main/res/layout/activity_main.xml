@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="#52648f"
+        android:background="#607D8B"
         android:fitsSystemWindows="true"
         app:menu="@menu/activity_main_drawer">
 
@@ -28,7 +28,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:clickable="true"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/colorPrimaryDark"
+            >
 
             <TextView
                 android:id="@+id/signout_menu"

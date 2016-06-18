@@ -91,10 +91,10 @@ public class MainActivity extends AppCompatActivity
     private ConnectionFragment connectionFragment;
     private SessionFragment sessionFragment;
 
-    private Button serverGroupsCountButton;
-    private Button serversCountButton;
-    private Button serverAccountsCountButton;
-    private Button remoteUsersCountButton;
+    private TextView serverGroupsCountButton;
+    private TextView serversCountButton;
+    private TextView serverAccountsCountButton;
+    private TextView remoteUsersCountButton;
 
     private TextView headerUserInfoTextView;
 
@@ -110,10 +110,10 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         Typeface labelFont = Typeface.createFromAsset(getAssets(),"fonts/DESIB.TTF");
-        serverGroupsCountButton = (Button) findViewById(R.id.serverGroupsCountButton);
-        serversCountButton = (Button) findViewById(R.id.serversCountButton);
-        serverAccountsCountButton = (Button) findViewById(R.id.serverAccountsCountButton);
-        remoteUsersCountButton = (Button) findViewById(R.id.remoteUsersCountButton);
+        serverGroupsCountButton = (TextView) findViewById(R.id.serverGroupsCountButton);
+        serversCountButton = (TextView) findViewById(R.id.serversCountButton);
+        serverAccountsCountButton = (TextView) findViewById(R.id.serverAccountsCountButton);
+        remoteUsersCountButton = (TextView) findViewById(R.id.remoteUsersCountButton);
         try {
             serverGroupsCountButton.setTypeface(labelFont);
             serversCountButton.setTypeface(labelFont);
