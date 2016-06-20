@@ -1,11 +1,10 @@
 /*************************************************************************
- *
  * Veera CONFIDENTIAL
  * __________________
- *
- *  [2016] Veera System Incorporated
- *  All Rights Reserved.
- *
+ * <p>
+ * [2016] Veera System Incorporated
+ * All Rights Reserved.
+ * <p>
  * NOTICE:  All information contained herein is, and remains
  * the property of Veera System Incorporated and its suppliers,
  * if any.  The intellectual and technical concepts contained
@@ -41,6 +40,7 @@ public class FailedConnectionAdapter extends RecyclerView.Adapter<FailedConnecti
     public void updateModel(List<FailedConnectionModel.UsersFailCount> models) {
         this.connectionListModels = models;
     }
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemLayoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.connectionfailedlistrow, null);
@@ -58,7 +58,7 @@ public class FailedConnectionAdapter extends RecyclerView.Adapter<FailedConnecti
         holder.usernameTextView.setText(connectionListModels.get(position).getUsername());
         holder.ipTextView.setText(String.valueOf(connectionListModels.get(position).getSourceIp()));
         holder.failReasonTextView.setText(connectionListModels.get(position).getFailReason());
-        holder.countTextView.setText("Count: "+String.valueOf(connectionListModels.get(position).getTotal()));
+        holder.countTextView.setText("Count: " + String.valueOf(connectionListModels.get(position).getTotal()));
         holder.stateTextView.setText(connectionListModels.get(position).getState());
     }
 
@@ -66,8 +66,7 @@ public class FailedConnectionAdapter extends RecyclerView.Adapter<FailedConnecti
     public int getItemCount() {
         try {
             return connectionListModels.size();
-        }
-        catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             return 0;
         }
     }

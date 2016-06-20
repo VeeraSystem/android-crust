@@ -1,11 +1,10 @@
 /*************************************************************************
- *
  * Veera CONFIDENTIAL
  * __________________
- *
- *  [2016] Veera System Incorporated
- *  All Rights Reserved.
- *
+ * <p>
+ * [2016] Veera System Incorporated
+ * All Rights Reserved.
+ * <p>
  * NOTICE:  All information contained herein is, and remains
  * the property of Veera System Incorporated and its suppliers,
  * if any.  The intellectual and technical concepts contained
@@ -23,12 +22,11 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v7.widget.LinearLayoutManager;
 import android.widget.Button;
 
 import com.veerasystem.crust.Adapter.ActiveConnectionAdapter;
@@ -83,6 +81,7 @@ public class ConnectionFragment extends Fragment {
         activeButton.setText("Active (" + this.modelsActive.size() + ")");
         activeButton.setText(activeButton.getText().toString().replace("  ▼", "")); //Remove if exist
         activeButton.setText(activeButton.getText() + "  ▼");
+
         //Notifying View to Reload
         activeConnectionAdapter.notifyDataSetChanged();
     }
@@ -92,8 +91,7 @@ public class ConnectionFragment extends Fragment {
 
         //Updating Title to show count
         failedButton.setText("Failed (" + this.modelsFailed.size() + ")");
-//        failedButton.setText(failedButton.getText().toString().replace("  ▼", ""));  //Remove if exist
-//        failedButton.setText(failedButton.getText() + "  ▼");
+
         //Notifying View to Reload
         failedConnectionAdapter.notifyDataSetChanged();
     }

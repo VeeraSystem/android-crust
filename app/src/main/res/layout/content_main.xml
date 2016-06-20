@@ -21,12 +21,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:baselineAligned="false"
             android:orientation="horizontal"
             android:weightSum="4">
 
             <LinearLayout
                 android:layout_width="0px"
-
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:background="@color/box4"
@@ -40,14 +40,14 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="15sp" />
 
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
                     android:gravity="center"
-                    android:text="Server Group"
+                    android:text="@string/server_group"
                     android:textColor="@color/colorPrimary"
                     android:textSize="12sp" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -66,15 +66,15 @@
                     android:id="@+id/serversCountButton"
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
-                    android:textColor="@color/colorPrimary"
                     android:gravity="center|bottom"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="15sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
                     android:gravity="center"
-                    android:text="Server"
+                    android:text="@string/server_statistics"
                     android:textColor="@color/colorPrimary"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -103,7 +103,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
                     android:gravity="center"
-                    android:text="Server Account"
+                    android:text="@string/server_account"
                     android:textColor="@color/colorPrimary"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -132,7 +132,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
                     android:gravity="center"
-                    android:text="Remote User"
+                    android:text="@string/remote_user_statistics"
                     android:textColor="@color/colorPrimary"
                     android:textSize="12sp" />
             </LinearLayout>

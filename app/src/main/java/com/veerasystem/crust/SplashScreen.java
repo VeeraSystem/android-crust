@@ -1,11 +1,10 @@
 /*************************************************************************
- *
  * Veera CONFIDENTIAL
  * __________________
- *
- *  [2016] Veera System Incorporated
- *  All Rights Reserved.
- *
+ * <p>
+ * [2016] Veera System Incorporated
+ * All Rights Reserved.
+ * <p>
  * NOTICE:  All information contained herein is, and remains
  * the property of Veera System Incorporated and its suppliers,
  * if any.  The intellectual and technical concepts contained
@@ -28,20 +27,22 @@ import android.widget.TextView;
 public class SplashScreen extends AppCompatActivity {
 
     private TextView crustText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
         crustText = (TextView) findViewById(R.id.crustText);
-        Typeface crustFont = Typeface.createFromAsset(this.getAssets(),"fonts/double_force_7.ttf");
+        Typeface crustFont = Typeface.createFromAsset(this.getAssets(), "fonts/double_force_7.ttf");
         crustText.setTypeface(crustFont);
 
-        Thread timerThread = new Thread(){
-            public void run(){
+        //Keeping SplashScreen visible for 3000ms
+        Thread timerThread = new Thread() {
+            public void run() {
                 try {
                     sleep(3000);
-                } catch(InterruptedException e) {
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
                     Intent intent = new Intent(SplashScreen.this, LoginActivity.class);

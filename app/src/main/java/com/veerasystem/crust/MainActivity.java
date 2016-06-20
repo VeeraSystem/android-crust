@@ -1,11 +1,10 @@
 /*************************************************************************
- *
  * Veera CONFIDENTIAL
  * __________________
- *
- *  [2016] Veera System Incorporated
- *  All Rights Reserved.
- *
+ * <p>
+ * [2016] Veera System Incorporated
+ * All Rights Reserved.
+ * <p>
  * NOTICE:  All information contained herein is, and remains
  * the property of Veera System Incorporated and its suppliers,
  * if any.  The intellectual and technical concepts contained
@@ -109,7 +108,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Typeface labelFont = Typeface.createFromAsset(getAssets(),"fonts/DESIB.TTF");
+        Typeface labelFont = Typeface.createFromAsset(getAssets(), "fonts/DESIB.TTF");
         serverGroupsCountButton = (TextView) findViewById(R.id.serverGroupsCountButton);
         serversCountButton = (TextView) findViewById(R.id.serversCountButton);
         serverAccountsCountButton = (TextView) findViewById(R.id.serverAccountsCountButton);
@@ -122,13 +121,6 @@ public class MainActivity extends AppCompatActivity
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-//        Intent intent = getIntent();
-//        Bundle bundle = intent.getExtras();
-//        if (bundle != null) {
-//            tokenID = "Token " + bundle.get("TOKEN").toString();
-//            serverAddress = bundle.get("SERVERADDRESS").toString();
-//        }
 
         //Load From Database
         SharedPreferences pref = getApplicationContext().getSharedPreferences("CRUST", 0);
@@ -164,6 +156,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View nvView = navigationView.inflateHeaderView(R.layout.nav_header_main);
         headerUserInfoTextView = (TextView) nvView.findViewById(R.id.headerUserInfoTextView);
+
         //Loading Username from Database
         headerUserInfoTextView.setText(username);
 
@@ -173,6 +166,7 @@ public class MainActivity extends AppCompatActivity
         signout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 logoutUser();
 
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("CRUST", 0);
@@ -180,21 +174,16 @@ public class MainActivity extends AppCompatActivity
                 editor.remove("TOKEN");
                 editor.commit();
 
-
-
                 Intent i = getBaseContext().getPackageManager()
-                        .getLaunchIntentForPackage( getBaseContext().getPackageName() );
+                        .getLaunchIntentForPackage(getBaseContext().getPackageName());
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
-
-
             }
         });
     }
 
     //Change The Backgournd Color of Tabs
     public void setTabColor(TabHost tabhost) {
-
         for (int i = 0; i < tabhost.getTabWidget().getChildCount(); i++)
             tabhost.getTabWidget().getChildAt(i).setBackgroundColor(1); //unselected
 
@@ -271,9 +260,8 @@ public class MainActivity extends AppCompatActivity
                 exitIntent.addCategory(Intent.CATEGORY_HOME);
                 exitIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(exitIntent);
-            }
-            else {
-                Toast.makeText(this,"Press back one more time to exit", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "Press back one more time to exit", Toast.LENGTH_LONG).show();
                 doubleExitPressed = true;
 
                 new Handler().postDelayed(new Runnable() {
@@ -302,7 +290,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-           reloadAllList();
+            reloadAllList();
             return true;
         }
 
@@ -350,45 +338,43 @@ public class MainActivity extends AppCompatActivity
         loadServerGroupChartData();
     }
 
-     public void getFilteredActiveSessionList(String sourceIp, String remoteUser, String server) {
-         Log.d("Crust",remoteUser);
+    public void getFilteredActiveSessionList(String sourceIp, String remoteUser, String server) {
+        HashMap<String, String> parameters = new HashMap<String, String>();
 
-         HashMap<String, String> parameters = new HashMap<String, String>();
+        if (!sourceIp.isEmpty())
+            parameters.put("client_ip", sourceIp);
+        if (!remoteUser.isEmpty())
+            parameters.put("remoteuser", remoteUser);
+        if (!server.isEmpty())
+            parameters.put("server", server);
 
-         if (!sourceIp.isEmpty())
-             parameters.put("client_ip",sourceIp);
-         if (!remoteUser.isEmpty())
-             parameters.put("remoteuser", remoteUser);
-         if (!server.isEmpty())
-             parameters.put("server", server);
+        Observable<ResponseBody> activeSessionList = crustService.filterActiveSessions(tokenID, 1, parameters);
+        activeSessionList.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<ResponseBody>() {
+                    @Override
+                    public void onCompleted() {
 
-         Observable<ResponseBody> activeSessionList = crustService.filterActiveSessions(tokenID, 1, parameters);
-         activeSessionList.subscribeOn(Schedulers.newThread())
-                 .observeOn(AndroidSchedulers.mainThread())
-                 .subscribe(new Subscriber<ResponseBody>() {
-                     @Override
-                     public void onCompleted() {
+                    }
 
-                     }
+                    @Override
+                    public void onError(Throwable e) {
 
-                     @Override
-                     public void onError(Throwable e) {
+                    }
 
-                     }
+                    @Override
+                    public void onNext(ResponseBody responseBody) {
+                        try {
+                            ActiveSessionModel activeSessionModel = gson.fromJson(responseBody.string(), ActiveSessionModel.class);
+                            List<ActiveSessionModel.Result> itemsData;
+                            itemsData = activeSessionModel.getsResult();
 
-                     @Override
-                     public void onNext(ResponseBody responseBody) {
-                         try {
-                             ActiveSessionModel activeSessionModel = gson.fromJson(responseBody.string(), ActiveSessionModel.class);
-                             List<ActiveSessionModel.Result> itemsData;
-                             itemsData = activeSessionModel.getsResult();
-
-                             sessionFragment.updateListActive(itemsData);
-                         } catch (IOException e) {
-                             e.printStackTrace();
-                         }
-                     }
-                 });
+                            sessionFragment.updateListActive(itemsData);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
     }
 
     public void getActiveConnectionList() {
@@ -512,7 +498,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void getServerGroupCount() {
-
         Observable<ResponseBody> serverGroupCount = crustService.getServerGroupCount(tokenID);
         serverGroupCount.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -677,12 +662,11 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onNext(ResponseBody responseBody) {
                         Log.d("Message State", responseBody.toString());
-
                     }
                 });
     }
 
-     public void loadServerGroupChartData() {
+    public void loadServerGroupChartData() {
         Observable<ResponseBody> serverGroupChartData = crustService.loadServerGroupChartData(tokenID);
         serverGroupChartData.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -699,21 +683,21 @@ public class MainActivity extends AppCompatActivity
 
                     @Override
                     public void onNext(ResponseBody responseBody) {
-                        try {
-                            ServerCountChartModel serverCountChartModel = gson.fromJson(responseBody.string(),ServerCountChartModel.class);
-                            Log.d("Chart Data",serverCountChartModel.getServerCounts().get(0).get(0).toString());
-                            Log.d("Chart Data",serverCountChartModel.getServerCounts().get(0).get(1).toString());
-                            Log.d("Chart Data",serverCountChartModel.getServerCounts().get(0).toString());
-                            Log.d("Chart Data",serverCountChartModel.getServerCounts().toString());
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        //Commenting for now
+//                        try {
+//                            ServerCountChartModel serverCountChartModel = gson.fromJson(responseBody.string(), ServerCountChartModel.class);
+//                            Log.d("Chart Data", serverCountChartModel.getServerCounts().get(0).get(0).toString());
+//                            Log.d("Chart Data", serverCountChartModel.getServerCounts().get(0).get(1).toString());
+//                            Log.d("Chart Data", serverCountChartModel.getServerCounts().get(0).toString());
+//                            Log.d("Chart Data", serverCountChartModel.getServerCounts().toString());
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
                     }
                 });
     }
 
     public void logoutUser() {
-        Log.d("Crsut","Calling Logout");
         Observable<ResponseBody> logoutResponce = crustService.logout(tokenID);
         logoutResponce.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -730,9 +714,7 @@ public class MainActivity extends AppCompatActivity
 
                     @Override
                     public void onNext(ResponseBody responseBody) {
-
                         Log.d("Logout State", responseBody.toString());
-
                     }
                 });
     }

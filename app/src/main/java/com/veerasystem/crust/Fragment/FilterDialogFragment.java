@@ -19,8 +19,6 @@
 package com.veerasystem.crust.Fragment;
 
 import android.app.Dialog;
-
-
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -48,13 +46,10 @@ public class FilterDialogFragment extends android.support.v4.app.DialogFragment 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
         try {
             callback = (OnFilterListener) getTargetFragment();
-        }
-        catch (ClassCastException e) {
-            throw  new ClassCastException("Calling fragment must implement onFilterListner");
+        } catch (ClassCastException e) {
+            throw new ClassCastException("Calling fragment must implement onFilterListner");
         }
     }
 
@@ -75,7 +70,7 @@ public class FilterDialogFragment extends android.support.v4.app.DialogFragment 
                 .setPositiveButton("Filter", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        callback.onFilterAdded(sourceIPFilterEditText.getText().toString(),remoteUserFilterEditText.getText().toString(),
+                        callback.onFilterAdded(sourceIPFilterEditText.getText().toString(), remoteUserFilterEditText.getText().toString(),
                                 serverFilterEditText.getText().toString());
                     }
                 })
@@ -85,7 +80,6 @@ public class FilterDialogFragment extends android.support.v4.app.DialogFragment 
                         Log.d("Crust", "Cancel");
                     }
                 });
-
 
         return filterBuilder.create();
     }

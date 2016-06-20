@@ -25,4 +25,24 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="type_your_message_here"> Type your message here …</string>
+    <string name="crust">Crust</string>
+    <string name="remote_user">Remote User</string>
+    <string name="source_ip">Source IP</string>
+    <string name="server">Server</string>
+    <string name="server_group">Server Group</string>
+    <string name="server_statistics">Server</string>
+    <string name="server_account">Server Account</string>
+    <string name="remote_user_statistics">Remote User</string>
+    <string name="crust_caps">CRUST</string>
+    <string name="VeeraInternetAddress">VeeraSystem.com</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="username">Username</string>
+    <string name="host">Host</string>
+    <string name="password">Password</string>
+    <string name="otp">OTP</string>
+    <string name="login">Login</string>
+    <string name="company_logo_desc">Company Logo</string>
+    <string name="kill_button_text">Kill</string>
+    <string name="message_button_text">Message</string>
 </resources>

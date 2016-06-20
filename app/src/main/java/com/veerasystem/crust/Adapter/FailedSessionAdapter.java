@@ -1,11 +1,10 @@
 /*************************************************************************
- *
  * Veera CONFIDENTIAL
  * __________________
- *
- *  [2016] Veera System Incorporated
- *  All Rights Reserved.
- *
+ * <p>
+ * [2016] Veera System Incorporated
+ * All Rights Reserved.
+ * <p>
  * NOTICE:  All information contained herein is, and remains
  * the property of Veera System Incorporated and its suppliers,
  * if any.  The intellectual and technical concepts contained
@@ -25,7 +24,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.veerasystem.crust.Model.ActiveSessionModel;
 import com.veerasystem.crust.Model.FailedSessionModel;
 import com.veerasystem.crust.R;
 
@@ -34,7 +32,6 @@ import java.util.List;
 public class FailedSessionAdapter extends RecyclerView.Adapter<FailedSessionAdapter.MyViewHolder> {
 
     private List<FailedSessionModel.SessionFailCount> sessionListModels;
-
 
     public FailedSessionAdapter(List<FailedSessionModel.SessionFailCount> models) {
         this.sessionListModels = models;
@@ -63,15 +60,14 @@ public class FailedSessionAdapter extends RecyclerView.Adapter<FailedSessionAdap
         holder.ipTextView.setText(String.valueOf(sessionListModels.get(position).getClientIp()));
         holder.connectionTextView.setText(sessionListModels.get(position).getServerAccount());
         holder.reasonTextView.setText(String.valueOf(sessionListModels.get(position).getFailReason()));
-        holder.countTextView.setText("Count: "+String.valueOf(sessionListModels.get(position).getTotal()));
+        holder.countTextView.setText("Count: " + String.valueOf(sessionListModels.get(position).getTotal()));
     }
 
     @Override
     public int getItemCount() {
         try {
             return sessionListModels.size();
-        }
-        catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             return 0;
         }
     }

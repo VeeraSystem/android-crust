@@ -1,11 +1,10 @@
 /*************************************************************************
- *
  * Veera CONFIDENTIAL
  * __________________
- *
- *  [2016] Veera System Incorporated
- *  All Rights Reserved.
- *
+ * <p>
+ * [2016] Veera System Incorporated
+ * All Rights Reserved.
+ * <p>
  * NOTICE:  All information contained herein is, and remains
  * the property of Veera System Incorporated and its suppliers,
  * if any.  The intellectual and technical concepts contained
@@ -38,7 +37,6 @@ public class FailedConnectionModel {
     public void setUsersFailCounts(List<UsersFailCount> usersFailCounts) {
         this.usersFailCounts = usersFailCounts;
     }
-
 
     public class UsersFailCount {
         @SerializedName("username")

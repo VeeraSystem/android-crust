@@ -29,31 +29,33 @@
             android:layout_alignParentRight="true"
             android:layout_weight="1"
             android:text="Failed" />
+
     </LinearLayout>
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshConnectionActiveLayout"
-        android:layout_below="@id/switchLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/switchLayout">
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/connectionActiveRecyclerView"
-
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content" />
+
     </android.support.v4.widget.SwipeRefreshLayout>
 
-     <android.support.v4.widget.SwipeRefreshLayout
+    <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshConnectionFailedLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-         android:layout_below="@id/swipeRefreshConnectionActiveLayout">
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/connectionFailedRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        android:layout_below="@id/swipeRefreshConnectionActiveLayout">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/connectionFailedRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
     </android.support.v4.widget.SwipeRefreshLayout>
 
 

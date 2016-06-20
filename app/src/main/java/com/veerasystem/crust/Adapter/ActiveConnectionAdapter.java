@@ -1,11 +1,10 @@
 /*************************************************************************
- *
  * Veera CONFIDENTIAL
  * __________________
- *
- *  [2016] Veera System Incorporated
- *  All Rights Reserved.
- *
+ * <p>
+ * [2016] Veera System Incorporated
+ * All Rights Reserved.
+ * <p>
  * NOTICE:  All information contained herein is, and remains
  * the property of Veera System Incorporated and its suppliers,
  * if any.  The intellectual and technical concepts contained
@@ -42,6 +41,7 @@ public class ActiveConnectionAdapter extends RecyclerView.Adapter<ActiveConnecti
     public void updateModel(List<Result> models) {
         this.connectionListModels = models;
     }
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemLayoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.connectionlistrow, null);
@@ -59,7 +59,7 @@ public class ActiveConnectionAdapter extends RecyclerView.Adapter<ActiveConnecti
         holder.startTextView.setText(connectionListModels.get(position).getmCreatedAt());
         holder.ipTextView.setText(String.valueOf(connectionListModels.get(position).getmSourceIp()));
         holder.remoteUserTextView.setText(connectionListModels.get(position).getmUsername());
-        holder.pIdTextView.setText("PID: "+String.valueOf(connectionListModels.get(position).getmPid()));
+        holder.pIdTextView.setText("PID: " + String.valueOf(connectionListModels.get(position).getmPid()));
         holder.stateTextView.setText(connectionListModels.get(position).getmState());
     }
 
@@ -67,8 +67,7 @@ public class ActiveConnectionAdapter extends RecyclerView.Adapter<ActiveConnecti
     public int getItemCount() {
         try {
             return connectionListModels.size();
-        }
-        catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             return 0;
         }
     }
@@ -82,7 +81,9 @@ public class ActiveConnectionAdapter extends RecyclerView.Adapter<ActiveConnecti
 
         public MyViewHolder(View view) {
             super(view);
-            Typeface ipFont = Typeface.createFromAsset(view.getContext().getAssets(),"fonts/expressway_rg.ttf");
+
+            Typeface ipFont = Typeface.createFromAsset(view.getContext().getAssets(), "fonts/expressway_rg.ttf");
+
             startTextView = (TextView) view.findViewById(R.id.connectionStart);
             ipTextView = (TextView) view.findViewById(R.id.connectionIp);
             ipTextView.setTypeface(ipFont);

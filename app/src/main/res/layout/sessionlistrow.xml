@@ -1,14 +1,11 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:cardView="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainSessionCard"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     cardView:cardBackgroundColor="@color/listItem"
     cardView:cardCornerRadius="3dp"
-    cardView:cardUseCompatPadding="true"
-
-    >
+    cardView:cardUseCompatPadding="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,14 +19,10 @@
             <TextView
                 android:id="@+id/sessionRemoteUser"
                 android:layout_width="110dp"
-
                 android:layout_height="wrap_content"
                 android:gravity="start"
-
-
                 android:paddingLeft="12dp"
-                android:text="User"
-
+                android:paddingRight="12dp"
                 android:textColor="@color/itemListTextColor_dark"
                 android:textSize="19sp"
                 android:textStyle="bold" />
@@ -37,15 +30,12 @@
             <TextView
                 android:id="@+id/sessionIp"
                 android:layout_width="240dp"
-
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/sessionRemoteUser"
                 android:gravity="bottom"
                 android:paddingLeft="10dp"
-
+                android:paddingRight="10dp"
                 android:paddingTop="5dp"
-                android:text="192.168.092.304"
-
                 android:textColor="@color/itemListTextColor_dark"
                 android:textSize="25sp"
                 android:textStyle="bold" />
@@ -54,15 +44,15 @@
                 android:id="@+id/separatorVertical"
                 android:layout_width="2dp"
                 android:layout_height="match_parent"
-
                 android:layout_toRightOf="@id/sessionIp"
-
+                android:layout_toEndOf="@id/sessionIp"
                 android:background="#949CAF" />
 
             <LinearLayout
                 android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:layout_toRightOf="@id/separatorVertical"
+                android:layout_toEndOf="@id/separatorVertical"
                 android:orientation="vertical"
                 android:weightSum="2">
 
@@ -72,11 +62,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="1"
-
                     android:padding="5dp"
-                    android:text="State"
-
-
                     android:textColor="@color/itemListTextColor_dark"
                     android:textSize="12sp" />
 
@@ -85,11 +71,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-
                     android:layout_weight="1"
                     android:padding="5dp"
-
-                    android:text="123123"
                     android:textColor="@color/itemListTextColor_dark"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -104,8 +87,6 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-
-
                 android:background="#949CAF" />
 
             <TextView
@@ -113,16 +94,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-
                 android:padding="3dp"
-                android:text="ssh://thekeeper session name is here"
-
-
                 android:textColor="@color/itemListTextColor_dark"
-
                 android:textSize="10sp"
                 android:typeface="monospace" />
-
 
         </LinearLayout>
 
@@ -134,8 +109,6 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-
-
                 android:background="#949CAF" />
 
             <TextView
@@ -143,15 +116,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-
                 android:padding="3dp"
-                android:text="2014/12/34 12:23"
-
                 android:textColor="@color/itemListTextColor_light"
-
                 android:textSize="10sp"
                 android:typeface="monospace" />
-
 
         </LinearLayout>
 
@@ -169,7 +137,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorPrimary"
-                android:text="Kill"
                 android:textColor="@color/buttonTextColor" />
 
             <Button
@@ -178,7 +145,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorPrimary"
-                android:text="Message"
                 android:textColor="@color/buttonTextColor" />
 
         </LinearLayout>
@@ -196,16 +162,14 @@
                 android:layout_height="90dp"
                 android:background="#ffffff"
                 android:ems="10"
-                android:hint=" Type your message here ..."
+                android:hint="@string/type_your_message_here"
                 android:inputType="textLongMessage"
                 android:textColor="#000000" />
 
             <LinearLayout
-
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-
                 android:weightSum="3">
 
                 <Button
@@ -214,7 +178,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:backgroundTint="@color/colorPrimary"
-                    android:text="Close"
                     android:textColor="@color/buttonTextColor" />
 
                 <Button
@@ -223,14 +186,11 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:backgroundTint="@color/colorPrimary"
-                    android:text="Send"
                     android:textColor="@color/buttonTextColor" />
 
             </LinearLayout>
         </LinearLayout>
 
-
     </LinearLayout>
-
 
 </android.support.v7.widget.CardView>

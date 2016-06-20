@@ -12,17 +12,16 @@
     tools:context="com.veerasystem.crust.SplashScreen">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_centerInParent="true"
-        android:id="@+id/linearLayout">
+        android:orientation="vertical">
 
         <ImageView
             android:layout_width="200dp"
             android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
-
             android:src="@drawable/biglogo" />
 
         <TextView
@@ -30,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="CRUST"
+            android:text="@string/crust_caps"
             android:textColor="#ffffff"
             android:textSize="45sp" />
 
@@ -38,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="VeeraSystem.com"
+            android:text="@string/VeeraInternetAddress"
             android:textColor="#ffffff"
             android:textSize="15sp" />
     </LinearLayout>
@@ -46,10 +45,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Loading ..."
-        android:textColor="#ffffff"
-
-        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-         />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:text="Loading ..."
+        android:textColor="#ffffff" />
 </RelativeLayout>

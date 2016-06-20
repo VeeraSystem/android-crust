@@ -1,11 +1,10 @@
 /*************************************************************************
- *
  * Veera CONFIDENTIAL
  * __________________
- *
- *  [2016] Veera System Incorporated
- *  All Rights Reserved.
- *
+ * <p>
+ * [2016] Veera System Incorporated
+ * All Rights Reserved.
+ * <p>
  * NOTICE:  All information contained herein is, and remains
  * the property of Veera System Incorporated and its suppliers,
  * if any.  The intellectual and technical concepts contained
@@ -19,15 +18,13 @@
 
 package com.veerasystem.crust.Model;
 
-import java.util.List;
-
-/**
- * Created by tux on 5/9/16.
- */
-import java.util.ArrayList;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.List;
+
+//We don't use this class for now
 public class ServerCountChartModel {
 
     @SerializedName("server_counts")
@@ -35,18 +32,14 @@ public class ServerCountChartModel {
     private List<List<String>> serverCounts = new ArrayList<List<String>>();
 
     /**
-     *
-     * @return
-     * The serverCounts
+     * @return The serverCounts
      */
     public List<List<String>> getServerCounts() {
         return serverCounts;
     }
 
     /**
-     *
-     * @param serverCounts
-     * The server_counts
+     * @param serverCounts The server_counts
      */
     public void setServerCounts(List<List<String>> serverCounts) {
         this.serverCounts = serverCounts;

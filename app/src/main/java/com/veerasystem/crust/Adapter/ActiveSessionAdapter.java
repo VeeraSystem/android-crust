@@ -1,11 +1,10 @@
 /*************************************************************************
- *
  * Veera CONFIDENTIAL
  * __________________
- *
- *  [2016] Veera System Incorporated
- *  All Rights Reserved.
- *
+ * <p>
+ * [2016] Veera System Incorporated
+ * All Rights Reserved.
+ * <p>
  * NOTICE:  All information contained herein is, and remains
  * the property of Veera System Incorporated and its suppliers,
  * if any.  The intellectual and technical concepts contained
@@ -19,11 +18,7 @@
 
 package com.veerasystem.crust.Adapter;
 
-import android.content.Context;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,8 +30,6 @@ import android.widget.TextView;
 import com.veerasystem.crust.Fragment.SessionFragment;
 import com.veerasystem.crust.Model.ActiveSessionModel;
 import com.veerasystem.crust.R;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -68,12 +61,13 @@ public class ActiveSessionAdapter extends RecyclerView.Adapter<ActiveSessionAdap
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
+
         holder.startTextView.setText(sessionListModels.get(position).getmCreatedAt());
         holder.ipTextView.setText(String.valueOf(sessionListModels.get(position).getmClientIp()));
         holder.remoteUserTextView.setText(sessionListModels.get(position).getmRemoteUser());
         holder.pIdTextView.setText("PID: " + String.valueOf(sessionListModels.get(position).getmPid()));
         holder.stateTextView.setText(sessionListModels.get(position).getmFailReason());
-        holder.sessionConnectionTextView.setText(sessionListModels.get(position).getmServerAccount()+"@"+sessionListModels.get(position).getmServer());
+        holder.sessionConnectionTextView.setText(sessionListModels.get(position).getmServerAccount() + "@" + sessionListModels.get(position).getmServer());
 
         holder.killSessionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,13 +92,14 @@ public class ActiveSessionAdapter extends RecyclerView.Adapter<ActiveSessionAdap
             }
         });
 
-         holder.sessionSendMessageButton.setOnClickListener(new View.OnClickListener() {
+        holder.sessionSendMessageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int id = sessionListModels.get(position).getmId();
                 String message = holder.sessionMessageTextView.getText().toString();
 
                 mSessionFragment.sendMessage(id, message);
+
                 //Clear Message
                 holder.sessionMessageTextView.setText("");
             }
@@ -120,7 +115,7 @@ public class ActiveSessionAdapter extends RecyclerView.Adapter<ActiveSessionAdap
         }
     }
 
-    public  class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView startTextView;
         public TextView ipTextView;
         public TextView remoteUserTextView;
@@ -171,6 +166,5 @@ public class ActiveSessionAdapter extends RecyclerView.Adapter<ActiveSessionAdap
             else
                 llExpandArea.setVisibility(View.VISIBLE);
         }
-
     }
 }

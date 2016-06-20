@@ -1,11 +1,10 @@
 /*************************************************************************
- *
  * Veera CONFIDENTIAL
  * __________________
- *
- *  [2016] Veera System Incorporated
- *  All Rights Reserved.
- *
+ * <p>
+ * [2016] Veera System Incorporated
+ * All Rights Reserved.
+ * <p>
  * NOTICE:  All information contained herein is, and remains
  * the property of Veera System Incorporated and its suppliers,
  * if any.  The intellectual and technical concepts contained
@@ -42,7 +41,6 @@ public class ActiveConnectionModel {
     @Expose
     private List<Result> sResult = new ArrayList<Result>();
 
-
     public int getmCount() {
         return mCount;
     }
@@ -74,7 +72,6 @@ public class ActiveConnectionModel {
     public void setsResult(List<Result> sResult) {
         this.sResult = sResult;
     }
-
 
     public class Result {
         @SerializedName("id")
@@ -116,7 +113,6 @@ public class ActiveConnectionModel {
         @SerializedName("state")
         @Expose
         private String mState;
-
 
         public int getmId() {
             return mId;
@@ -197,10 +193,7 @@ public class ActiveConnectionModel {
         public Boolean getmSuccessful() {
             return this.mSuccessful;
         }
-
-
     }
-
 }
 
 

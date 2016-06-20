@@ -1,11 +1,10 @@
 /*************************************************************************
- *
  * Veera CONFIDENTIAL
  * __________________
- *
- *  [2016] Veera System Incorporated
- *  All Rights Reserved.
- *
+ * <p>
+ * [2016] Veera System Incorporated
+ * All Rights Reserved.
+ * <p>
  * NOTICE:  All information contained herein is, and remains
  * the property of Veera System Incorporated and its suppliers,
  * if any.  The intellectual and technical concepts contained
@@ -21,9 +20,8 @@ package com.veerasystem.crust;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,8 +48,10 @@ public class LoginActivity extends AppCompatActivity {
 
     Button otpButton;
     Button loginButton;
+
     CrustServiceAPI crustService;
     Gson gson;
+
     SharedPreferences pref;
     SharedPreferences.Editor editor;
 
@@ -80,19 +80,16 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Retrofit retrofit = new Retrofit.Builder()
-                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                    .baseUrl("http://"+serverAddress.getText().toString()+"/api/v1/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-
+                        .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                        .baseUrl("http://" + serverAddress.getText().toString() + "/api/v1/")
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
 
                 gson = new Gson();
 
                 crustService = retrofit.create(CrustServiceAPI.class);
                 getOTP();
-
             }
         });
 
@@ -121,22 +118,14 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(ResponseBody responseBody) {
-                        try {
-                            Log.d("Crust",responseBody.string());
-
                             serverAddress.setVisibility(View.GONE);
                             usernameEditText.setVisibility(View.GONE);
                             passwordEditText.setVisibility(View.GONE);
                             loginButton.setVisibility(View.GONE);
                             otpEditText.setVisibility(View.VISIBLE);
                             otpButton.setVisibility(View.VISIBLE);
-
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
                     }
                 });
-
     }
 
     public void login() {
@@ -162,7 +151,7 @@ public class LoginActivity extends AppCompatActivity {
                             Intent main = new Intent(LoginActivity.this, MainActivity.class);
 
                             editor.putString("Username", usernameEditText.getText().toString());
-                            editor.putString("TOKEN","Token "+model.getToken());
+                            editor.putString("TOKEN", "Token " + model.getToken());
                             editor.putString("SERVERADDRESS", serverAddress.getText().toString());
                             editor.commit();
 

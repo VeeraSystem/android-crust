@@ -21,21 +21,17 @@ package com.veerasystem.crust.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-import com.google.gson.Gson;
 import com.veerasystem.crust.Adapter.ActiveSessionAdapter;
 import com.veerasystem.crust.Adapter.FailedSessionAdapter;
-import com.veerasystem.crust.CrustServiceAPI;
 import com.veerasystem.crust.MainActivity;
 import com.veerasystem.crust.Model.ActiveSessionModel;
 import com.veerasystem.crust.Model.FailedSessionModel;
@@ -43,11 +39,7 @@ import com.veerasystem.crust.R;
 
 import java.util.List;
 
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
-
-public class SessionFragment extends Fragment implements FilterDialogFragment.OnFilterListener{
+public class SessionFragment extends Fragment implements FilterDialogFragment.OnFilterListener {
 
     FilterDialogFragment filterDialogFragment;
 
@@ -73,11 +65,11 @@ public class SessionFragment extends Fragment implements FilterDialogFragment.On
     }
 
     public void killSession(int id) {
-        ((MainActivity)getActivity()).killSession(id);
+        ((MainActivity) getActivity()).killSession(id);
     }
 
     public void sendMessage(int id, String message) {
-        ((MainActivity)getActivity()).sendMessage(message, id);
+        ((MainActivity) getActivity()).sendMessage(message, id);
     }
 
     @Override
@@ -213,6 +205,4 @@ public class SessionFragment extends Fragment implements FilterDialogFragment.On
     public void onFilterAdded(String sourceIp, String remoteUser, String server) {
         ((MainActivity) getActivity()).getFilteredActiveSessionList(sourceIp, remoteUser, server);
     }
-
-
 }

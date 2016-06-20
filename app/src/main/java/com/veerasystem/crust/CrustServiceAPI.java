@@ -1,11 +1,10 @@
 /*************************************************************************
- *
  * Veera CONFIDENTIAL
  * __________________
- *
- *  [2016] Veera System Incorporated
- *  All Rights Reserved.
- *
+ * <p>
+ * [2016] Veera System Incorporated
+ * All Rights Reserved.
+ * <p>
  * NOTICE:  All information contained herein is, and remains
  * the property of Veera System Incorporated and its suppliers,
  * if any.  The intellectual and technical concepts contained
@@ -19,16 +18,13 @@
 
 package com.veerasystem.crust;
 
-
 import java.util.HashMap;
 
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
@@ -110,18 +106,17 @@ public interface CrustServiceAPI {
     );
 
     @GET("crustsessions/kill/")
-    Observable<ResponseBody> killSession (
+    Observable<ResponseBody> killSession(
             @Header("Authorization") String token,
             @Query("session_id") int sessionID
     );
 
     @GET("crustsessions/sendmsg/")
-    Observable<ResponseBody> sendSessionMessage (
+    Observable<ResponseBody> sendSessionMessage(
             @Header("Authorization") String token,
             @Query("message") String message,
             @Query("session_id") int sessionID
     );
-
 
     @GET("servergroups/servercounts/")
     Observable<ResponseBody> loadServerGroupChartData(

@@ -16,98 +16,102 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
+        android:contentDescription="@string/company_logo_desc"
         android:src="@drawable/logo" />
 
     <EditText
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="70dp"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
         android:layout_centerInParent="true"
-        android:hint="Username"
+        android:hint="@string/username"
         android:inputType="text"
         android:maxLines="1"
-        android:singleLine="true"
-        android:text="master"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        android:text="llk" />
 
     <EditText
         android:id="@+id/serverAddress"
         android:layout_width="wrap_content"
         android:layout_height="70dp"
         android:layout_above="@id/username"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:hint="Host"
+        android:layout_alignParentStart="true"
+        android:hint="@string/host"
         android:inputType="text"
         android:maxLines="1"
-        android:singleLine="true"
-        android:text="5.9.192.162:8000"
         android:textSize="15sp" />
-
 
     <EditText
         android:id="@+id/password"
         android:layout_width="wrap_content"
         android:layout_height="70dp"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@id/username"
         android:layout_centerHorizontal="true"
-        android:hint="Password"
+        android:hint="@string/password"
         android:inputType="textPassword"
         android:maxLines="1"
-        android:singleLine="true"
-        android:text="master"
+
         android:textSize="15sp" />
 
     <EditText
         android:id="@+id/otp"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="70dp"
-          android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_centerInParent="true"
-
+        android:layout_alignParentStart="true"
         android:layout_below="@id/password"
-
-        android:hint="OTP"
+        android:layout_centerInParent="true"
+        android:inputType="text"
+        android:hint="@string/otp"
         android:maxLines="1"
-        android:singleLine="true"
-        android:textSize="25sp" />
-
+        android:textSize="25sp"
+        android:textAlignment="center"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/otpButton"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:text="Login OTP"
-
-        android:textSize="15sp" />
+        android:text="@string/login"
+        android:textSize="15sp"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:text="Login"
-
+        android:text="@string/login"
         android:textSize="15sp" />
 
 </RelativeLayout>

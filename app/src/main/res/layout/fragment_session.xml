@@ -43,8 +43,8 @@
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/filter"
-            />
+            android:src="@drawable/filter" />
+
     </LinearLayout>
 
     <android.support.v4.widget.SwipeRefreshLayout
@@ -57,6 +57,7 @@
             android:id="@+id/sessionActiveRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <android.support.v4.widget.SwipeRefreshLayout
@@ -69,7 +70,7 @@
             android:id="@+id/sessionFailedRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-    </android.support.v4.widget.SwipeRefreshLayout>
 
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </RelativeLayout>
