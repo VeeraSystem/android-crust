@@ -71,14 +71,14 @@ public class FailedConnectionAdapter extends RecyclerView.Adapter<FailedConnecti
         }
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView usernameTextView;
-        public TextView ipTextView;
-        public TextView failReasonTextView;
-        public TextView countTextView;
-        public TextView stateTextView;
+    static class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView usernameTextView;
+        TextView ipTextView;
+        TextView failReasonTextView;
+        TextView countTextView;
+        TextView stateTextView;
 
-        public MyViewHolder(View view) {
+        MyViewHolder(View view) {
             super(view);
 
             usernameTextView = (TextView) view.findViewById(R.id.connectionFailedUsername);

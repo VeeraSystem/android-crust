@@ -41,16 +41,16 @@ import java.util.List;
 
 public class SessionFragment extends Fragment implements FilterDialogFragment.OnFilterListener {
 
-    FilterDialogFragment filterDialogFragment;
+    private FilterDialogFragment filterDialogFragment;
 
     private ActiveSessionAdapter activeSessionAdapter;
     private FailedSessionAdapter failedSessionAdapter;
 
-    RecyclerView activeSRecyclerView;
-    RecyclerView failedSRecyclerView;
+    private RecyclerView activeSRecyclerView;
+    private RecyclerView failedSRecyclerView;
 
-    SwipeRefreshLayout activeSwipeRefresh;
-    SwipeRefreshLayout failedSwipeRefresh;
+    private SwipeRefreshLayout activeSwipeRefresh;
+    private SwipeRefreshLayout failedSwipeRefresh;
 
     private List<ActiveSessionModel.Result> modelsActive;
     private List<FailedSessionModel.SessionFailCount> modelsFailed;
@@ -58,7 +58,7 @@ public class SessionFragment extends Fragment implements FilterDialogFragment.On
     private Button activeButton;
     private Button failedButton;
 
-    private ImageButton filterActiveButton;
+
 
     public SessionFragment() {
         // Required empty public constructor
@@ -190,6 +190,7 @@ public class SessionFragment extends Fragment implements FilterDialogFragment.On
         filterDialogFragment = new FilterDialogFragment();
         filterDialogFragment.setTargetFragment(this, 0);
 
+        ImageButton filterActiveButton;
         filterActiveButton = (ImageButton) rootView.findViewById(R.id.filterActiveSessionButton);
         filterActiveButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -101,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void getOTP() {
+    private void getOTP() {
         Observable<ResponseBody> loginResponse = crustService.loginOtpRequest(usernameEditText.getText().toString(), passwordEditText.getText().toString());
         loginResponse.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -128,7 +128,7 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    public void login() {
+    private void login() {
         Observable<ResponseBody> loginResponse = crustService.login(usernameEditText.getText().toString(), passwordEditText.getText().toString(), otpEditText.getText().toString());
         loginResponse.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())

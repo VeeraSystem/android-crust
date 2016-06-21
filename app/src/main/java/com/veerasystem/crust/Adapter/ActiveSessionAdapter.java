@@ -115,25 +115,25 @@ public class ActiveSessionAdapter extends RecyclerView.Adapter<ActiveSessionAdap
         }
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView startTextView;
-        public TextView ipTextView;
-        public TextView remoteUserTextView;
-        public TextView pIdTextView;
-        public TextView stateTextView;
-        public TextView sessionConnectionTextView;
-        public Button killSessionButton;
-        public Button messageSessionButton;
-        public Button sessionSendMessageButton;
-        public Button sessionCancelMessageButton;
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        TextView startTextView;
+        TextView ipTextView;
+        TextView remoteUserTextView;
+        TextView pIdTextView;
+        TextView stateTextView;
+        TextView sessionConnectionTextView;
+        Button killSessionButton;
+        Button messageSessionButton;
+        Button sessionSendMessageButton;
+        Button sessionCancelMessageButton;
 
-        public EditText sessionMessageTextView;
+        EditText sessionMessageTextView;
 
-        public LinearLayout llExpandArea;
-        public LinearLayout llExpandAreaMessage;
+        LinearLayout llExpandArea;
+        LinearLayout llExpandAreaMessage;
 
 
-        public MyViewHolder(View view) {
+        MyViewHolder(View view) {
             super(view);
             view.setOnClickListener(this);
 

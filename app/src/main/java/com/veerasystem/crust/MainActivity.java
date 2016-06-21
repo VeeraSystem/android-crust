@@ -22,13 +22,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -38,17 +39,12 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.os.Handler;
-
-import rx.Observable;
 
 import com.google.gson.Gson;
 import com.veerasystem.crust.Fragment.ConnectionFragment;
-//import com.veerasystem.crust.Fragment.ServerCountGroupFragment;
 import com.veerasystem.crust.Fragment.SessionFragment;
 import com.veerasystem.crust.Model.ActiveConnectionModel;
 import com.veerasystem.crust.Model.ActiveConnectionModel.Result;
@@ -57,7 +53,6 @@ import com.veerasystem.crust.Model.FailedConnectionModel;
 import com.veerasystem.crust.Model.FailedSessionModel;
 import com.veerasystem.crust.Model.RemoteUsersModel;
 import com.veerasystem.crust.Model.ServerAccountModel;
-import com.veerasystem.crust.Model.ServerCountChartModel;
 import com.veerasystem.crust.Model.ServerCountModel;
 import com.veerasystem.crust.Model.ServerGroupCountModel;
 
@@ -70,9 +65,12 @@ import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+
+//import com.veerasystem.crust.Fragment.ServerCountGroupFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -84,8 +82,8 @@ public class MainActivity extends AppCompatActivity
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
-    public String tokenID;
-    public String serverAddress;
+    private String tokenID;
+    private String serverAddress;
 
     private ConnectionFragment connectionFragment;
     private SessionFragment sessionFragment;
@@ -200,7 +198,7 @@ public class MainActivity extends AppCompatActivity
 //        tabLayout.getTabAt(2).setIcon(tabIcons[2]);
     }
 
-    public void setupViewPager(ViewPager viewPager) {
+    private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFragment(connectionFragment, "Connections");
         viewPagerAdapter.addFragment(sessionFragment, "Sessions");
@@ -314,7 +312,7 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    public void initConnectionRx() {
+    private void initConnectionRx() {
         retrofit = new Retrofit.Builder()
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .baseUrl("http://" + serverAddress + "/api/v1/")
@@ -377,7 +375,7 @@ public class MainActivity extends AppCompatActivity
                 });
     }
 
-    public void getActiveConnectionList() {
+    private void getActiveConnectionList() {
         Observable<ResponseBody> activeConnectionList = crustService.activeConnections(tokenID, 1, 1, 10);
         activeConnectionList.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -407,7 +405,7 @@ public class MainActivity extends AppCompatActivity
                 });
     }
 
-    public void getFailedConnectionList() {
+    private void getFailedConnectionList() {
         Observable<ResponseBody> failedConnectionList = crustService.failedConnections(tokenID);
         failedConnectionList.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -437,7 +435,7 @@ public class MainActivity extends AppCompatActivity
                 });
     }
 
-    public void getActiveSessionList() {
+    private void getActiveSessionList() {
         Observable<ResponseBody> activeSessionList = crustService.activeSessions(tokenID, 1, 1, 10);
         activeSessionList.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -467,7 +465,7 @@ public class MainActivity extends AppCompatActivity
                 });
     }
 
-    public void getFailedSessionList() {
+    private void getFailedSessionList() {
         Observable<ResponseBody> failedSessionList = crustService.failedSessions(tokenID);
         failedSessionList.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -497,7 +495,7 @@ public class MainActivity extends AppCompatActivity
                 });
     }
 
-    public void getServerGroupCount() {
+    private void getServerGroupCount() {
         Observable<ResponseBody> serverGroupCount = crustService.getServerGroupCount(tokenID);
         serverGroupCount.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -528,7 +526,7 @@ public class MainActivity extends AppCompatActivity
                 });
     }
 
-    public void getServerAccountCount() {
+    private void getServerAccountCount() {
         Observable<ResponseBody> serverAccountCount = crustService.getServerAccountCount(tokenID);
         serverAccountCount.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -558,7 +556,7 @@ public class MainActivity extends AppCompatActivity
                 });
     }
 
-    public void getRemoteUserCount() {
+    private void getRemoteUserCount() {
         Observable<ResponseBody> remoteUserCount = crustService.getRemoteUserCount(tokenID);
         remoteUserCount.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -588,7 +586,7 @@ public class MainActivity extends AppCompatActivity
                 });
     }
 
-    public void getServerCount() {
+    private void getServerCount() {
         Observable<ResponseBody> serverCount = crustService.getServerCount(tokenID);
         serverCount.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -666,7 +664,7 @@ public class MainActivity extends AppCompatActivity
                 });
     }
 
-    public void loadServerGroupChartData() {
+    private void loadServerGroupChartData() {
         Observable<ResponseBody> serverGroupChartData = crustService.loadServerGroupChartData(tokenID);
         serverGroupChartData.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -697,7 +695,7 @@ public class MainActivity extends AppCompatActivity
                 });
     }
 
-    public void logoutUser() {
+    private void logoutUser() {
         Observable<ResponseBody> logoutResponce = crustService.logout(tokenID);
         logoutResponce.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())

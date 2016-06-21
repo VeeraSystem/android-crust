@@ -72,14 +72,14 @@ public class ActiveConnectionAdapter extends RecyclerView.Adapter<ActiveConnecti
         }
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView startTextView;
-        public TextView ipTextView;
-        public TextView remoteUserTextView;
-        public TextView pIdTextView;
-        public TextView stateTextView;
+    static class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView startTextView;
+        TextView ipTextView;
+        TextView remoteUserTextView;
+        TextView pIdTextView;
+        TextView stateTextView;
 
-        public MyViewHolder(View view) {
+        MyViewHolder(View view) {
             super(view);
 
             Typeface ipFont = Typeface.createFromAsset(view.getContext().getAssets(), "fonts/expressway_rg.ttf");

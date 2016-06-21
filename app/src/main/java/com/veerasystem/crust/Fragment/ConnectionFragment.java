@@ -43,11 +43,11 @@ public class ConnectionFragment extends Fragment {
     private ActiveConnectionAdapter activeConnectionAdapter;
     private FailedConnectionAdapter failedConnectionAdapter;
 
-    RecyclerView activeCRecyclerView;
-    RecyclerView failedCRecyclerView;
+    private RecyclerView activeCRecyclerView;
+    private RecyclerView failedCRecyclerView;
 
-    SwipeRefreshLayout activeCSwipeRefresh;
-    SwipeRefreshLayout failedCSwipeRefresh;
+    private SwipeRefreshLayout activeCSwipeRefresh;
+    private SwipeRefreshLayout failedCSwipeRefresh;
 
     private List<Result> modelsActive;
     private List<FailedConnectionModel.UsersFailCount> modelsFailed;

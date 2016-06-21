@@ -72,14 +72,14 @@ public class FailedSessionAdapter extends RecyclerView.Adapter<FailedSessionAdap
         }
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView remoteUserTextView;
-        public TextView ipTextView;
-        public TextView connectionTextView;
-        public TextView reasonTextView;
-        public TextView countTextView;
+    static class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView remoteUserTextView;
+        TextView ipTextView;
+        TextView connectionTextView;
+        TextView reasonTextView;
+        TextView countTextView;
 
-        public MyViewHolder(View view) {
+        MyViewHolder(View view) {
             super(view);
 
             remoteUserTextView = (TextView) view.findViewById(R.id.sessionFailedRemoteUser);
