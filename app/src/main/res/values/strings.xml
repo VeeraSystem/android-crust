@@ -45,4 +45,6 @@
     <string name="company_logo_desc">Company Logo</string>
     <string name="kill_button_text">Kill</string>
     <string name="message_button_text">Message</string>
+    <string name="cancel_button_text">Cancel</string>
+    <string name="send_button_text">Send</string>
 </resources>

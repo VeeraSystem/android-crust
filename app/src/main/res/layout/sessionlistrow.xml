@@ -136,6 +136,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:text="@string/kill_button_text"
                 android:backgroundTint="@color/colorPrimary"
                 android:textColor="@color/buttonTextColor" />
 
@@ -144,6 +145,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:text="@string/message_button_text"
                 android:backgroundTint="@color/colorPrimary"
                 android:textColor="@color/buttonTextColor" />
 
@@ -177,6 +179,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:text="@string/cancel_button_text"
                     android:backgroundTint="@color/colorPrimary"
                     android:textColor="@color/buttonTextColor" />
 
@@ -185,6 +188,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:text="@string/send_button_text"
                     android:backgroundTint="@color/colorPrimary"
                     android:textColor="@color/buttonTextColor" />
 
