@@ -1,10 +1,10 @@
 /*************************************************************************
  * Veera CONFIDENTIAL
  * __________________
- * <p>
+ * <p/>
  * [2016] Veera System Incorporated
  * All Rights Reserved.
- * <p>
+ * <p/>
  * NOTICE:  All information contained herein is, and remains
  * the property of Veera System Incorporated and its suppliers,
  * if any.  The intellectual and technical concepts contained
@@ -20,11 +20,13 @@ package com.veerasystem.crust;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.veerasystem.crust.Model.TokenModel;
@@ -102,6 +104,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void getOTP() {
+        Toast toast = Toast.makeText(LoginActivity.this, "   Please Wait ...    ", Toast.LENGTH_SHORT);
+        toast.getView().setBackgroundColor(Color.parseColor("#607D8B"));
+        toast.show();
+
         Observable<ResponseBody> loginResponse = crustService.loginOtpRequest(usernameEditText.getText().toString(), passwordEditText.getText().toString());
         loginResponse.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -113,17 +119,19 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Toast toast = Toast.makeText(LoginActivity.this, "    Error on login, Try again    ", Toast.LENGTH_SHORT);
+                        toast.getView().setBackgroundColor(Color.parseColor("#607D8B"));
+                        toast.show();
                     }
 
                     @Override
                     public void onNext(ResponseBody responseBody) {
-                            serverAddress.setVisibility(View.GONE);
-                            usernameEditText.setVisibility(View.GONE);
-                            passwordEditText.setVisibility(View.GONE);
-                            loginButton.setVisibility(View.GONE);
-                            otpEditText.setVisibility(View.VISIBLE);
-                            otpButton.setVisibility(View.VISIBLE);
+                        serverAddress.setVisibility(View.GONE);
+                        usernameEditText.setVisibility(View.GONE);
+                        passwordEditText.setVisibility(View.GONE);
+                        loginButton.setVisibility(View.GONE);
+                        otpEditText.setVisibility(View.VISIBLE);
+                        otpButton.setVisibility(View.VISIBLE);
                     }
                 });
     }

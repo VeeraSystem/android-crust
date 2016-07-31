@@ -40,7 +40,7 @@
     <string name="username">Username</string>
     <string name="host">Host</string>
     <string name="password">Password</string>
-    <string name="otp">OTP</string>
+    <string name="otp">You will receive an OTP code via SMS shortly</string>
     <string name="login">Login</string>
     <string name="company_logo_desc">Company Logo</string>
     <string name="kill_button_text">Kill</string>
