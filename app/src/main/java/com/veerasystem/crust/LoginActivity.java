@@ -32,9 +32,11 @@ import com.google.gson.Gson;
 import com.veerasystem.crust.Model.TokenModel;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 
 import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.HttpException;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
@@ -103,6 +105,20 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        if (otpEditText.getVisibility() == View.VISIBLE) {
+            serverAddress.setVisibility(View.VISIBLE);
+            usernameEditText.setVisibility(View.VISIBLE);
+            passwordEditText.setVisibility(View.VISIBLE);
+            loginButton.setVisibility(View.VISIBLE);
+            otpEditText.setVisibility(View.GONE);
+            otpButton.setVisibility(View.GONE);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
     private void getOTP() {
         Toast toast = Toast.makeText(LoginActivity.this, "   Please Wait ...    ", Toast.LENGTH_SHORT);
         toast.getView().setBackgroundColor(Color.parseColor("#607D8B"));
@@ -119,9 +135,29 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast toast = Toast.makeText(LoginActivity.this, "    Error on login, Try again    ", Toast.LENGTH_SHORT);
-                        toast.getView().setBackgroundColor(Color.parseColor("#607D8B"));
-                        toast.show();
+                        String errorMessage = "Error on Login";
+
+                        //under control! don't touch this code
+                        if (e instanceof SocketTimeoutException) {
+                            serverAddress.setVisibility(View.GONE);
+                            usernameEditText.setVisibility(View.GONE);
+                            passwordEditText.setVisibility(View.GONE);
+                            loginButton.setVisibility(View.GONE);
+                            otpEditText.setVisibility(View.VISIBLE);
+                            otpButton.setVisibility(View.VISIBLE);
+                        } else {
+                            try {
+                                Gson gson = new Gson();
+                                ErrorModel error = gson.fromJson(((HttpException) e).response().errorBody().string(), ErrorModel.class);
+                                errorMessage = error.getError();
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+
+                            Toast toast = Toast.makeText(LoginActivity.this, errorMessage, Toast.LENGTH_SHORT);
+                            toast.getView().setBackgroundColor(Color.parseColor("#607D8B"));
+                            toast.show();
+                        }
                     }
 
                     @Override
@@ -148,7 +184,18 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable e) {
+                        String errorMessage = "Error on Login";
+                        try {
+                            Gson gson = new Gson();
+                            ErrorModel error = gson.fromJson(((HttpException) e).response().errorBody().string(), ErrorModel.class);
+                            errorMessage = error.getError();
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
 
+                        Toast toast = Toast.makeText(LoginActivity.this, errorMessage, Toast.LENGTH_SHORT);
+                        toast.getView().setBackgroundColor(Color.parseColor("#607D8B"));
+                        toast.show();
                     }
 
                     @Override
