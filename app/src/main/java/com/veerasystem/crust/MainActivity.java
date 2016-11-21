@@ -712,6 +712,7 @@ public class MainActivity extends AppCompatActivity
 
                     @Override
                     public void onNext(ResponseBody responseBody) {
+                        finish();
                         Log.d("Logout State", responseBody.toString());
                     }
                 });
