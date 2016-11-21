@@ -146,12 +146,14 @@ public class LoginActivity extends AppCompatActivity {
                             otpEditText.setVisibility(View.VISIBLE);
                             otpButton.setVisibility(View.VISIBLE);
                         } else {
-                            try {
-                                Gson gson = new Gson();
-                                ErrorModel error = gson.fromJson(((HttpException) e).response().errorBody().string(), ErrorModel.class);
-                                errorMessage = error.getError();
-                            } catch (IOException e1) {
-                                e1.printStackTrace();
+                            if (e instanceof HttpException) {
+                                try {
+                                    Gson gson = new Gson();
+                                    ErrorModel error = gson.fromJson(((HttpException) e).response().errorBody().string(), ErrorModel.class);
+                                    errorMessage = error.getError();
+                                } catch (IOException e1) {
+                                    e1.printStackTrace();
+                                }
                             }
 
                             Toast toast = Toast.makeText(LoginActivity.this, errorMessage, Toast.LENGTH_SHORT);
@@ -185,12 +187,14 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onError(Throwable e) {
                         String errorMessage = "Error on Login";
-                        try {
-                            Gson gson = new Gson();
-                            ErrorModel error = gson.fromJson(((HttpException) e).response().errorBody().string(), ErrorModel.class);
-                            errorMessage = error.getError();
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
+                        if (e instanceof HttpException) {
+                            try {
+                                Gson gson = new Gson();
+                                ErrorModel error = gson.fromJson(((HttpException) e).response().errorBody().string(), ErrorModel.class);
+                                errorMessage = error.getError();
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
                         }
 
                         Toast toast = Toast.makeText(LoginActivity.this, errorMessage, Toast.LENGTH_SHORT);
