@@ -1,38 +1,50 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "com.veerasystem.crust"
-        minSdkVersion 14
-        targetSdkVersion 23
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
     }
+
     buildTypes {
+        debug {
+            minifyEnabled true
+            useProguard false
+        }
         release {
-            minifyEnabled false
+            minifyEnabled true
+            useProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
 
+
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Support Library
+    compile "com.android.support:appcompat-v7:$rootProject.ext.supportLibVersion"
+    compile "com.android.support:design:$rootProject.ext.supportLibVersion"
+    compile "com.android.support:support-v4:$rootProject.ext.supportLibVersion"
+    compile "com.android.support:recyclerview-v7:$rootProject.ext.supportLibVersion"
+    compile "com.android.support:cardview-v7:$rootProject.ext.supportLibVersion"
+
+    // Local Unit Test
     testCompile 'junit:junit:4.12'
-    compile 'com.squareup.retrofit2:converter-gson:2.0.1'
-    compile 'com.squareup.retrofit2:converter-gson:2.0.1'
-    compile 'com.android.support:appcompat-v7:23.3.0'
-    compile 'com.android.support:design:23.3.0'
-    compile 'com.squareup.retrofit2:retrofit-converters:2.0.1'
-    compile 'com.squareup.retrofit2:retrofit:2.0.1'
-    compile 'com.squareup.okhttp3:okhttp:3.2.0'
-    compile 'io.reactivex:rxandroid:1.0.1'
-    compile 'io.reactivex:rxjava:1.0.14'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
-    compile 'com.android.support:support-v4:23.3.0'
-    compile 'com.android.support:recyclerview-v7:23.3.0'
-    compile 'com.android.support:cardview-v7:23.3.0'
+
+    // Retrofit
+    compile "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitLibVersion"
+    compile "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitLibVersion"
+    compile "com.squareup.retrofit2:retrofit-converters:$rootProject.ext.retrofitLibVersion"
+    compile "com.squareup.retrofit2:adapter-rxjava:$rootProject.ext.retrofitLibVersion"
+
+    // RxJava
+    compile "io.reactivex:rxjava:$rootProject.rxJavaLibVersion"
+    compile "io.reactivex:rxandroid:$rootProject.rxAndroidLibVersion"
 }
