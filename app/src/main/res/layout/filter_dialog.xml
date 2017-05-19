@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -24,7 +25,12 @@
             android:id="@+id/filterSourceIp"
             android:layout_width="0px"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:hint="192.168.1.1"
+            android:maxLines="1"
+            android:textAlignment="center"
+            android:textColor="@color/editTextTextColor_dark"
+            tools:text="192.168.1.1" />
 
     </LinearLayout>
 
@@ -47,7 +53,12 @@
             android:id="@+id/filterRemoteUser"
             android:layout_width="0px"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:hint="admin"
+            android:maxLines="1"
+            android:textAlignment="center"
+            android:textColor="@color/editTextTextColor_dark"
+            tools:text="admin" />
     </LinearLayout>
 
     <LinearLayout
@@ -69,6 +80,11 @@
             android:id="@+id/filterServer"
             android:layout_width="0px"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:hint="Server-Name"
+            android:maxLines="1"
+            android:textAlignment="center"
+            android:textColor="@color/editTextTextColor_dark"
+            tools:text="Server-Name" />
     </LinearLayout>
 </LinearLayout>

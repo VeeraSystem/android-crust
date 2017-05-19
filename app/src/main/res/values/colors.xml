@@ -12,4 +12,5 @@
     <color name="itemListTextColor_dark">#607D8B</color>
     <color name="itemListTextColor_light">#8b9ba3</color>
     <color name="buttonTextColor">#ffffff</color>
+    <color name="editTextTextColor_dark">#2e3d45</color>
 </resources>

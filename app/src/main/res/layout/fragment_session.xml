@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.ConnectionFragment">
+    tools:context=".dashboard.connectionFragment.ConnectionFragment">
 
     <LinearLayout
         android:id="@+id/switchSessionLayout"
@@ -64,7 +64,8 @@
         android:id="@+id/swipeRefreshSessionFailedLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/swipeRefreshSessionActiveLayout">
+        android:layout_below="@id/swipeRefreshSessionActiveLayout"
+        android:visibility="gone">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/sessionFailedRecyclerView"
