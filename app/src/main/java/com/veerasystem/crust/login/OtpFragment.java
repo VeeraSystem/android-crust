@@ -30,6 +30,8 @@ import android.widget.EditText;
 
 import com.veerasystem.crust.R;
 
+import butterknife.BindView;
+
 public class OtpFragment extends Fragment implements OtpContract.View {
 
     private static final String TAG = "OtpFragment";
@@ -39,7 +41,9 @@ public class OtpFragment extends Fragment implements OtpContract.View {
 
     String username, password, ipAddress;
 
+    @BindView(R.id.otp)
     EditText otpEditText;
+    @BindView(R.id.otpButton)
     Button otpButton;
 
     public static OtpFragment newInstance() {
@@ -71,9 +75,6 @@ public class OtpFragment extends Fragment implements OtpContract.View {
             password = getArguments().getString("PASSWORD");
         }
 
-        otpEditText = (EditText) view.findViewById(R.id.otp);
-
-        otpButton = (Button) view.findViewById(R.id.otpButton);
         otpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

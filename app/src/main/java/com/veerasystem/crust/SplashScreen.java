@@ -24,16 +24,22 @@ import android.widget.TextView;
 
 import com.veerasystem.crust.login.AuthActivity;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class SplashScreen extends AppCompatActivity {
 
-    private TextView crustText;
+
+    @BindView(R.id.crustText)
+    TextView crustText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-        crustText = (TextView) findViewById(R.id.crustText);
+        ButterKnife.bind(this);
+
         Typeface crustFont = Typeface.createFromAsset(this.getAssets(), "fonts/double_force_7.ttf");
         crustText.setTypeface(crustFont);
 

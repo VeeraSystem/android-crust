@@ -23,10 +23,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.veerasystem.crust.data.FailedSessionModel;
 import com.veerasystem.crust.R;
+import com.veerasystem.crust.data.FailedSessionModel;
 
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 class FailedAdapter extends RecyclerView.Adapter<FailedAdapter.MyViewHolder> {
 
@@ -71,20 +74,21 @@ class FailedAdapter extends RecyclerView.Adapter<FailedAdapter.MyViewHolder> {
     }
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.sessionFailedRemoteUser)
         TextView remoteUserTextView;
+        @BindView(R.id.sessionFailedIp)
         TextView ipTextView;
+        @BindView(R.id.sessionFailedConnection)
         TextView connectionTextView;
+        @BindView(R.id.sessionFailedReason)
         TextView reasonTextView;
+        @BindView(R.id.sessionFailedCount)
         TextView countTextView;
 
         MyViewHolder(View view) {
             super(view);
 
-            remoteUserTextView = (TextView) view.findViewById(R.id.sessionFailedRemoteUser);
-            ipTextView = (TextView) view.findViewById(R.id.sessionFailedIp);
-            connectionTextView = (TextView) view.findViewById(R.id.sessionFailedConnection);
-            reasonTextView = (TextView) view.findViewById(R.id.sessionFailedReason);
-            countTextView = (TextView) view.findViewById(R.id.sessionFailedCount);
+            ButterKnife.bind(this, view);
         }
     }
 }

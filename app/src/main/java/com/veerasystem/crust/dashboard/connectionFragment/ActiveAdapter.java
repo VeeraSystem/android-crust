@@ -23,10 +23,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.veerasystem.crust.data.ActiveConnectionModel.Result;
 import com.veerasystem.crust.R;
+import com.veerasystem.crust.data.ActiveConnectionModel.Result;
 
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 class ActiveAdapter extends RecyclerView.Adapter<ActiveAdapter.MyViewHolder> {
 
@@ -67,24 +70,25 @@ class ActiveAdapter extends RecyclerView.Adapter<ActiveAdapter.MyViewHolder> {
     }
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.connectionStart)
         TextView startTextView;
+        @BindView(R.id.connectionIp)
         TextView ipTextView;
+        @BindView(R.id.connectionRemoteUser)
         TextView remoteUserTextView;
+        @BindView(R.id.connectionPid)
         TextView pIdTextView;
+        @BindView(R.id.connectionState)
         TextView stateTextView;
 
         MyViewHolder(View view) {
             super(view);
 
-            Typeface ipFont = Typeface.createFromAsset(view.getContext().getAssets(), "fonts/expressway_rg.ttf");
+            ButterKnife.bind(this, view);
 
-            startTextView = (TextView) view.findViewById(R.id.connectionStart);
-            ipTextView = (TextView) view.findViewById(R.id.connectionIp);
+            Typeface ipFont = Typeface.createFromAsset(view.getContext().getAssets(), "fonts/expressway_rg.ttf");
             ipTextView.setTypeface(ipFont);
-            remoteUserTextView = (TextView) view.findViewById(R.id.connectionRemoteUser);
             remoteUserTextView.setTypeface(ipFont);
-            pIdTextView = (TextView) view.findViewById(R.id.connectionPid);
-            stateTextView = (TextView) view.findViewById(R.id.connectionState);
         }
     }
 }

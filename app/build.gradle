@@ -47,4 +47,8 @@ dependencies {
     // RxJava
     compile "io.reactivex:rxjava:$rootProject.rxJavaLibVersion"
     compile "io.reactivex:rxandroid:$rootProject.rxAndroidLibVersion"
+
+    // Butterknife
+    compile 'com.jakewharton:butterknife:8.6.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
 }

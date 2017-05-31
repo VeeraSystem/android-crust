@@ -29,11 +29,17 @@ import android.widget.EditText;
 
 import com.veerasystem.crust.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class FilterDialogFragment extends android.support.v4.app.DialogFragment {
 
-    private EditText sourceIPFilterEditText;
-    private EditText remoteUserFilterEditText;
-    private EditText serverFilterEditText;
+    @BindView(R.id.filterSourceIp)
+    EditText sourceIPFilterEditText;
+    @BindView(R.id.filterRemoteUser)
+    EditText remoteUserFilterEditText;
+    @BindView(R.id.filterServer)
+    EditText serverFilterEditText;
 
     private OnFilterListener callback;
 
@@ -58,9 +64,7 @@ public class FilterDialogFragment extends android.support.v4.app.DialogFragment 
 
         View view = inflater.inflate(R.layout.filter_dialog, null);
 
-        sourceIPFilterEditText = (EditText) view.findViewById(R.id.filterSourceIp);
-        remoteUserFilterEditText = (EditText) view.findViewById(R.id.filterRemoteUser);
-        serverFilterEditText = (EditText) view.findViewById(R.id.filterServer);
+        ButterKnife.bind(this, view);
 
         filterBuilder.setView(view)
                 .setPositiveButton("Filter", new DialogInterface.OnClickListener() {

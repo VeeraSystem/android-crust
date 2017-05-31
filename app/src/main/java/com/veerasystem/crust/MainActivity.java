@@ -39,12 +39,25 @@ import com.veerasystem.crust.dashboard.DashboardPresenter;
 import com.veerasystem.crust.data.source.remote.Remote;
 import com.veerasystem.crust.utils.ActivityUtils;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity
         implements CrustContractor.View, NavigationView.OnNavigationItemSelectedListener {
 
     private CrustContractor.Presenter presenter;
 
     private TextView headerUserInfoTextView;
+
+    @BindView(R.id.signout_menu)
+    TextView signout;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawer;
+    @BindView(R.id.nav_view)
+    NavigationView navigationView;
 
     private DashboardFragment dashboardFragment;
     private FragmentManager fragmentManager;
@@ -61,6 +74,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         fragmentManager = getSupportFragmentManager();
 
@@ -82,16 +96,13 @@ public class MainActivity extends AppCompatActivity
 
         new DashboardPresenter(remote, dashboardFragment);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View nvView = navigationView.inflateHeaderView(R.layout.nav_header_main);
         headerUserInfoTextView = (TextView) nvView.findViewById(R.id.headerUserInfoTextView);
 
@@ -100,7 +111,6 @@ public class MainActivity extends AppCompatActivity
 
         navigationView.setNavigationItemSelectedListener(this);
 
-        TextView signout = (TextView) findViewById(R.id.signout_menu);
         signout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

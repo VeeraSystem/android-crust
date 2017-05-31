@@ -31,6 +31,9 @@ import com.veerasystem.crust.data.ActiveSessionModel;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 class ActiveAdapter extends RecyclerView.Adapter<ActiveAdapter.MyViewHolder> {
 
     private static final String TAG = "ActiveSessionAdapter";
@@ -115,20 +118,33 @@ class ActiveAdapter extends RecyclerView.Adapter<ActiveAdapter.MyViewHolder> {
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        @BindView(R.id.sessionStart)
         TextView startTextView;
+        @BindView(R.id.sessionIp)
         TextView ipTextView;
+        @BindView(R.id.sessionRemoteUser)
         TextView remoteUserTextView;
+        @BindView(R.id.sessionPid)
         TextView pIdTextView;
+        @BindView(R.id.sessionState)
         TextView stateTextView;
+        @BindView(R.id.sessionConnection)
         TextView sessionConnectionTextView;
+        @BindView(R.id.killSessionButton)
         Button killSessionButton;
+        @BindView(R.id.messageSessionButton)
         Button messageSessionButton;
+        @BindView(R.id.sessionSendMessageButton)
         Button sessionSendMessageButton;
+        @BindView(R.id.sessionCancelMessageButton)
         Button sessionCancelMessageButton;
 
+        @BindView(R.id.sessionMessageTextView)
         EditText sessionMessageTextView;
 
+        @BindView(R.id.llExpandArea)
         LinearLayout llExpandArea;
+        @BindView(R.id.llExpandAreaMessage)
         LinearLayout llExpandAreaMessage;
 
 
@@ -136,23 +152,7 @@ class ActiveAdapter extends RecyclerView.Adapter<ActiveAdapter.MyViewHolder> {
             super(view);
             view.setOnClickListener(this);
 
-            startTextView = (TextView) view.findViewById(R.id.sessionStart);
-            ipTextView = (TextView) view.findViewById(R.id.sessionIp);
-            remoteUserTextView = (TextView) view.findViewById(R.id.sessionRemoteUser);
-            pIdTextView = (TextView) view.findViewById(R.id.sessionPid);
-            stateTextView = (TextView) view.findViewById(R.id.sessionState);
-            sessionConnectionTextView = (TextView) view.findViewById(R.id.sessionConnection);
-
-            killSessionButton = (Button) view.findViewById(R.id.killSessionButton);
-            messageSessionButton = (Button) view.findViewById(R.id.messageSessionButton);
-
-            sessionCancelMessageButton = (Button) view.findViewById(R.id.sessionCancelMessageButton);
-            sessionSendMessageButton = (Button) view.findViewById(R.id.sessionSendMessageButton);
-
-            sessionMessageTextView = (EditText) view.findViewById(R.id.sessionMessageTextView);
-
-            llExpandArea = (LinearLayout) view.findViewById(R.id.llExpandArea);
-            llExpandAreaMessage = (LinearLayout) view.findViewById(R.id.llExpandAreaMessage);
+            ButterKnife.bind(this, view);
         }
 
         @Override

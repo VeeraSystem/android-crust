@@ -35,19 +35,29 @@ import com.veerasystem.crust.data.FailedConnectionModel;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class ConnectionFragment extends Fragment implements ConnectionContract.View {
 
     private ActiveAdapter activeAdapter;
     private FailedAdapter failedAdapter;
 
-    private RecyclerView activeCRecyclerView;
-    private RecyclerView failedCRecyclerView;
+    @BindView(R.id.connectionActiveRecyclerView)
+    RecyclerView activeCRecyclerView;
+    @BindView(R.id.connectionFailedRecyclerView)
+    RecyclerView failedCRecyclerView;
 
-    private SwipeRefreshLayout activeCSwipeRefresh;
-    private SwipeRefreshLayout failedCSwipeRefresh;
+    @BindView(R.id.swipeRefreshConnectionActiveLayout)
+    SwipeRefreshLayout activeCSwipeRefresh;
+    @BindView(R.id.swipeRefreshConnectionFailedLayout)
+    SwipeRefreshLayout failedCSwipeRefresh;
 
-    private Button activeButton;
-    private Button failedButton;
+    @BindView(R.id.activeButton)
+    Button activeButton;
+    @BindView(R.id.failedButton)
+    Button failedButton;
 
     private ConnectionContract.Presenter presenter;
 
@@ -70,11 +80,7 @@ public class ConnectionFragment extends Fragment implements ConnectionContract.V
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        activeCRecyclerView = (RecyclerView) view.findViewById(R.id.connectionActiveRecyclerView);
-        failedCRecyclerView = (RecyclerView) view.findViewById(R.id.connectionFailedRecyclerView);
-
-        activeCSwipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshConnectionActiveLayout);
-        failedCSwipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshConnectionFailedLayout);
+        ButterKnife.bind(this, view);
 
         activeCSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -101,44 +107,9 @@ public class ConnectionFragment extends Fragment implements ConnectionContract.V
         failedAdapter = new FailedAdapter();
         failedCRecyclerView.setAdapter(failedAdapter);
 
-        activeButton = (Button) view.findViewById(R.id.activeButton);
-        activeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activeButton.setTextColor(Color.WHITE); //Selected
-                activeButton.setText(activeButton.getText().toString().replace("  ▼", "")); //Remove if exist
-                activeButton.setText(activeButton.getText() + "  ▼");
-                failedButton.setTextColor(Color.GRAY);
-                failedButton.setText(failedButton.getText().toString().replace("  ▼", ""));
+        //Default
+        gotoActiveTab();
 
-                failedButton.setShadowLayer(1, 0, 1, Color.DKGRAY);
-
-                activeCSwipeRefresh.setVisibility(View.VISIBLE);
-                failedCSwipeRefresh.setVisibility(View.GONE);
-            }
-        });
-
-        failedButton = (Button) view.findViewById(R.id.failedButton);
-        failedButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activeButton.setTextColor(Color.GRAY);
-                failedButton.setText(failedButton.getText().toString().replace("  ▼", ""));  //Remove if exist
-                failedButton.setText(failedButton.getText() + "  ▼");
-                activeButton.setText(activeButton.getText().toString().replace("  ▼", ""));
-                activeButton.setShadowLayer(1, 0, 1, Color.DKGRAY);
-                failedButton.setTextColor(Color.WHITE); //Selected
-
-                activeCSwipeRefresh.setVisibility(View.GONE);
-                failedCSwipeRefresh.setVisibility(View.VISIBLE);
-            }
-        });
-
-        //Default font theme for buttons to show selected one
-        activeButton.setText(activeButton.getText() + "  ▼");
-        activeButton.setTextColor(Color.WHITE);
-        failedButton.setTextColor(Color.GRAY);
-        failedButton.setShadowLayer(1, 0, 1, Color.DKGRAY);
     }
 
     @Override
@@ -155,7 +126,6 @@ public class ConnectionFragment extends Fragment implements ConnectionContract.V
 
     @Override
     public void showActiveList(List<Result> models) {
-//        this.modelsActive = models;
         activeAdapter.updateModel(models);
 
         //Updating Title to show count
@@ -169,7 +139,6 @@ public class ConnectionFragment extends Fragment implements ConnectionContract.V
 
     @Override
     public void showFailedList(List<FailedConnectionModel.UsersFailCount> models) {
-//        this.modelsFailed = models;
         failedAdapter.updateModel(models);
 
         //Updating Title to show count
@@ -177,6 +146,33 @@ public class ConnectionFragment extends Fragment implements ConnectionContract.V
 
         //Notifying View to Reload
         failedAdapter.notifyDataSetChanged();
+    }
+
+    @OnClick(R.id.activeButton)
+    public void gotoActiveTab() {
+        activeButton.setTextColor(Color.WHITE); //Selected
+        activeButton.setText(activeButton.getText().toString().replace("  ▼", "")); //Remove if exist
+        activeButton.setText(activeButton.getText() + "  ▼");
+        failedButton.setTextColor(Color.GRAY);
+        failedButton.setText(failedButton.getText().toString().replace("  ▼", ""));
+
+        failedButton.setShadowLayer(1, 0, 1, Color.DKGRAY);
+
+        activeCSwipeRefresh.setVisibility(View.VISIBLE);
+        failedCSwipeRefresh.setVisibility(View.GONE);
+    }
+
+    @OnClick(R.id.failedButton)
+    public void gotoFailedTab() {
+        activeButton.setTextColor(Color.GRAY);
+        failedButton.setText(failedButton.getText().toString().replace("  ▼", ""));  //Remove if exist
+        failedButton.setText(failedButton.getText() + "  ▼");
+        activeButton.setText(activeButton.getText().toString().replace("  ▼", ""));
+        activeButton.setShadowLayer(1, 0, 1, Color.DKGRAY);
+        failedButton.setTextColor(Color.WHITE); //Selected
+
+        activeCSwipeRefresh.setVisibility(View.GONE);
+        failedCSwipeRefresh.setVisibility(View.VISIBLE);
     }
 
 }

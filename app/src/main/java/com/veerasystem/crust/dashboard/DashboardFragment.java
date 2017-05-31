@@ -41,21 +41,29 @@ import com.veerasystem.crust.data.source.remote.Remote;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class DashboardFragment extends Fragment implements DashboardContract.View {
 
     private static final String TAG = "DashboardFragment";
 
     private DashboardContract.Presenter presenter;
 
-    private TextView lblServerGroupsCount;
-    private TextView lblServersCount;
-    private TextView lblServerAccountsCount;
-    private TextView lblRemoteUsersCount;
+    @BindView(R.id.serverGroupsCountButton)
+    TextView lblServerGroupsCount;
+    @BindView(R.id.serversCountButton)
+    TextView lblServersCount;
+    @BindView(R.id.serverAccountsCountButton)
+    TextView lblServerAccountsCount;
+    @BindView(R.id.remoteUsersCountButton)
+    TextView lblRemoteUsersCount;
 
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
+    @BindView(R.id.tabs)
+    TabLayout tabLayout;
+    @BindView(R.id.viewpager)
+    ViewPager viewPager;
 
-    private String tokenID;
     private String serverAddress;
 
     private ConnectionFragment connectionFragment;
@@ -88,10 +96,7 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        lblServerGroupsCount = (TextView) view.findViewById(R.id.serverGroupsCountButton);
-        lblServersCount = (TextView) view.findViewById(R.id.serversCountButton);
-        lblServerAccountsCount = (TextView) view.findViewById(R.id.serverAccountsCountButton);
-        lblRemoteUsersCount = (TextView) view.findViewById(R.id.remoteUsersCountButton);
+        ButterKnife.bind(this, view);
 
         Typeface labelFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/DESIB.TTF");
         try {
@@ -105,7 +110,6 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
 
         //Load From DB
         SharedPreferences pref = getActivity().getSharedPreferences("CRUST", 0);
-        tokenID = pref.getString("TOKEN", null);
         serverAddress = pref.getString("SERVERADDRESS", null);
 
         if (connectionFragment == null)
@@ -122,10 +126,8 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
 
         new SessionPresenter(remote, sessionFragment);
 
-        viewPager = (ViewPager) view.findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
-        tabLayout = (TabLayout) view.findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
         setupTabIcons();

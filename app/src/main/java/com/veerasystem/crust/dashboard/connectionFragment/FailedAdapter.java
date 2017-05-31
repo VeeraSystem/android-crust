@@ -22,10 +22,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.veerasystem.crust.data.FailedConnectionModel;
 import com.veerasystem.crust.R;
+import com.veerasystem.crust.data.FailedConnectionModel;
 
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 class FailedAdapter extends RecyclerView.Adapter<FailedAdapter.MyViewHolder> {
 
@@ -66,20 +69,21 @@ class FailedAdapter extends RecyclerView.Adapter<FailedAdapter.MyViewHolder> {
     }
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.connectionFailedUsername)
         TextView usernameTextView;
+        @BindView(R.id.connectionFailedIp)
         TextView ipTextView;
+        @BindView(R.id.connectionFailedFailReason)
         TextView failReasonTextView;
+        @BindView(R.id.connectionFailedCount)
         TextView countTextView;
+        @BindView(R.id.connectionFailedState)
         TextView stateTextView;
 
         MyViewHolder(View view) {
             super(view);
 
-            usernameTextView = (TextView) view.findViewById(R.id.connectionFailedUsername);
-            ipTextView = (TextView) view.findViewById(R.id.connectionFailedIp);
-            failReasonTextView = (TextView) view.findViewById(R.id.connectionFailedFailReason);
-            countTextView = (TextView) view.findViewById(R.id.connectionFailedCount);
-            stateTextView = (TextView) view.findViewById(R.id.connectionFailedState);
+            ButterKnife.bind(this, view);
         }
     }
 }

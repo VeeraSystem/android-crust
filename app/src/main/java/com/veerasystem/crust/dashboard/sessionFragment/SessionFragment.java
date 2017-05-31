@@ -24,7 +24,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +37,10 @@ import com.veerasystem.crust.data.FailedSessionModel;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class SessionFragment extends Fragment implements SessionContract.View, FilterDialogFragment.OnFilterListener {
 
     private static final String TAG = "SessionFragment";
@@ -49,15 +52,25 @@ public class SessionFragment extends Fragment implements SessionContract.View, F
     private ActiveAdapter activeAdapter;
     private FailedAdapter failedSessionAdapter;
 
-    private RecyclerView activeSRecyclerView;
-    private RecyclerView failedSRecyclerView;
+    @BindView(R.id.sessionActiveRecyclerView)
+    RecyclerView activeSRecyclerView;
+    @BindView(R.id.sessionFailedRecyclerView)
+    RecyclerView failedSRecyclerView;
 
-    private SwipeRefreshLayout activeSwipeRefresh;
-    private SwipeRefreshLayout failedSwipeRefresh;
+    @BindView(R.id.swipeRefreshSessionActiveLayout)
+    SwipeRefreshLayout activeSwipeRefresh;
+    @BindView(R.id.swipeRefreshSessionFailedLayout)
+    SwipeRefreshLayout failedSwipeRefresh;
 
-    private LinearLayout filterSessionLayout;
-    private Button activeButton;
-    private Button failedButton;
+    @BindView(R.id.filterSessionLayout)
+    LinearLayout filterSessionLayout;
+    @BindView(R.id.activeSessionButton)
+    Button activeButton;
+    @BindView(R.id.failedSessionButton)
+    Button failedButton;
+
+    @BindView(R.id.filterActiveSessionButton)
+    ImageButton filterActiveButton;
 
     public static SessionFragment newInstance() {
         return new SessionFragment();
@@ -82,11 +95,8 @@ public class SessionFragment extends Fragment implements SessionContract.View, F
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        activeSRecyclerView = (RecyclerView) view.findViewById(R.id.sessionActiveRecyclerView);
-        failedSRecyclerView = (RecyclerView) view.findViewById(R.id.sessionFailedRecyclerView);
 
-        activeSwipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshSessionActiveLayout);
-        failedSwipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshSessionFailedLayout);
+        ButterKnife.bind(this, view);
 
         activeSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -113,54 +123,12 @@ public class SessionFragment extends Fragment implements SessionContract.View, F
         failedSessionAdapter = new FailedAdapter();
         failedSRecyclerView.setAdapter(failedSessionAdapter);
 
-        activeButton = (Button) view.findViewById(R.id.activeSessionButton);
-        activeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activeButton.setTextColor(Color.WHITE); //Selected
-                activeButton.setText(activeButton.getText().toString().replace("  ▼", "")); //Remove if exist
-                activeButton.setText(activeButton.getText() + "  ▼");
-                failedButton.setTextColor(Color.GRAY);
-                failedButton.setText(failedButton.getText().toString().replace("  ▼", ""));
-
-                failedButton.setShadowLayer(1, 0, 1, Color.DKGRAY);
-
-                filterSessionLayout.setVisibility(View.VISIBLE);
-                activeSwipeRefresh.setVisibility(View.VISIBLE);
-                failedSwipeRefresh.setVisibility(View.GONE);
-            }
-        });
-
-        failedButton = (Button) view.findViewById(R.id.failedSessionButton);
-        failedButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activeButton.setTextColor(Color.GRAY);
-                failedButton.setText(failedButton.getText().toString().replace("  ▼", ""));  //Remove if exist
-                failedButton.setText(failedButton.getText() + "  ▼");
-                activeButton.setText(activeButton.getText().toString().replace("  ▼", ""));
-                activeButton.setShadowLayer(1, 0, 1, Color.DKGRAY);
-                failedButton.setTextColor(Color.WHITE); //Selected
-
-                filterSessionLayout.setVisibility(View.GONE);
-                activeSwipeRefresh.setVisibility(View.GONE);
-                failedSwipeRefresh.setVisibility(View.VISIBLE);
-            }
-        });
-
-        filterSessionLayout = (LinearLayout) view.findViewById(R.id.filterSessionLayout);
-
-        //Default font theme for buttons to show selected one
-        activeButton.setText(activeButton.getText() + "  ▼");
-        activeButton.setTextColor(Color.WHITE);
-        failedButton.setTextColor(Color.GRAY);
-        failedButton.setShadowLayer(1, 0, 1, Color.DKGRAY);
+        //Default
+        gotoActiveTab();
 
         filterDialogFragment = new FilterDialogFragment();
         filterDialogFragment.setTargetFragment(this, 0);
 
-        ImageButton filterActiveButton;
-        filterActiveButton = (ImageButton) view.findViewById(R.id.filterActiveSessionButton);
         filterActiveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -214,5 +182,34 @@ public class SessionFragment extends Fragment implements SessionContract.View, F
     @Override
     public void onFilterAdded(String sourceIp, String remoteUser, String server) {
         presenter.loadFilteredActiveList(sourceIp, remoteUser, server);
+    }
+
+    @OnClick(R.id.activeSessionButton)
+    public void gotoActiveTab() {
+        activeButton.setTextColor(Color.WHITE); //Selected
+        activeButton.setText(activeButton.getText().toString().replace("  ▼", "")); //Remove if exist
+        activeButton.setText(activeButton.getText() + "  ▼");
+        failedButton.setTextColor(Color.GRAY);
+        failedButton.setText(failedButton.getText().toString().replace("  ▼", ""));
+
+        failedButton.setShadowLayer(1, 0, 1, Color.DKGRAY);
+
+        filterSessionLayout.setVisibility(View.VISIBLE);
+        activeSwipeRefresh.setVisibility(View.VISIBLE);
+        failedSwipeRefresh.setVisibility(View.GONE);
+    }
+
+    @OnClick(R.id.failedSessionButton)
+    public void gotoFailedTab() {
+        activeButton.setTextColor(Color.GRAY);
+        failedButton.setText(failedButton.getText().toString().replace("  ▼", ""));  //Remove if exist
+        failedButton.setText(failedButton.getText() + "  ▼");
+        activeButton.setText(activeButton.getText().toString().replace("  ▼", ""));
+        activeButton.setShadowLayer(1, 0, 1, Color.DKGRAY);
+        failedButton.setTextColor(Color.WHITE); //Selected
+
+        filterSessionLayout.setVisibility(View.GONE);
+        activeSwipeRefresh.setVisibility(View.GONE);
+        failedSwipeRefresh.setVisibility(View.VISIBLE);
     }
 }

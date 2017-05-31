@@ -30,6 +30,9 @@ import android.widget.Toast;
 
 import com.veerasystem.crust.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 public class LoginFragment extends Fragment implements LoginContract.View {
 
@@ -39,10 +42,15 @@ public class LoginFragment extends Fragment implements LoginContract.View {
 
     SharedPreferences pref;
 
+    @BindView(R.id.progressBar)
     ProgressBar progressBar;
+    @BindView(R.id.serverAddress)
     EditText serverAddress;
+    @BindView(R.id.username)
     EditText usernameEditText;
+    @BindView(R.id.password)
     EditText passwordEditText;
+    @BindView(R.id.loginButton)
     Button loginButton;
 
     public static LoginFragment newInstance() {
@@ -63,18 +71,13 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_login, container, false);
 
-        progressBar = (ProgressBar) root.findViewById(R.id.progressBar);
-
-        serverAddress = (EditText) root.findViewById(R.id.serverAddress);
-        usernameEditText = (EditText) root.findViewById(R.id.username);
-        passwordEditText = (EditText) root.findViewById(R.id.password);
-
-        loginButton = (Button) root.findViewById(R.id.loginButton);
+        ButterKnife.bind(this, root);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.getOTP(serverAddress.getText().toString(), usernameEditText.getText().toString(), passwordEditText.getText().toString());            }
+                presenter.getOTP(serverAddress.getText().toString(), usernameEditText.getText().toString(), passwordEditText.getText().toString());
+            }
         });
 
         return root;
@@ -112,9 +115,9 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     @Override
     public void showOtpPage(String hostIP, String username, String password) {
         Bundle values = new Bundle();
-        values.putString("HOSTIP",hostIP);
-        values.putString("USERNAME",username);
-        values.putString("PASSWORD",password);
+        values.putString("HOSTIP", hostIP);
+        values.putString("USERNAME", username);
+        values.putString("PASSWORD", password);
         listener.loadOtpPage(values);
     }
 
@@ -130,6 +133,7 @@ public class LoginFragment extends Fragment implements LoginContract.View {
 
     interface FragmentListener {
         void loadOtpPage(Bundle values);
+
         void showMainView();
     }
 }
