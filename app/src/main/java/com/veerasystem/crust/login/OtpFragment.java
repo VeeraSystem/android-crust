@@ -31,6 +31,7 @@ import android.widget.EditText;
 import com.veerasystem.crust.R;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class OtpFragment extends Fragment implements OtpContract.View {
 
@@ -68,6 +69,8 @@ public class OtpFragment extends Fragment implements OtpContract.View {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        ButterKnife.bind(this, view);
 
         if (getArguments() != null) {
             ipAddress = getArguments().getString("HOSTIP");
