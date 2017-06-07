@@ -111,6 +111,8 @@ public class MainActivity extends AppCompatActivity
 
         navigationView.setNavigationItemSelectedListener(this);
 
+        new Presenter(remote, this);
+
         signout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
