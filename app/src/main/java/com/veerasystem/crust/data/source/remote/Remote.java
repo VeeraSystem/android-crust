@@ -16,10 +16,12 @@
 
 package com.veerasystem.crust.data.source.remote;
 
+import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.veerasystem.crust.data.source.ApiAccess;
 
 import java.util.HashMap;
 
+import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -30,6 +32,7 @@ public class Remote implements ApiAccess {
 
     private static Remote INSTANCE = null;
     private static Retrofit retrofit;
+    private static OkHttpClient okHttpClient;
     private CrustServiceAPI crustService;
 
     public static Remote getINSTANCE() {
@@ -39,6 +42,9 @@ public class Remote implements ApiAccess {
     }
 
     private Remote() {
+        okHttpClient = new OkHttpClient.Builder()
+                .addNetworkInterceptor(new StethoInterceptor())
+                .build();
     }
 
     public void setup(String serverAddress) {
@@ -46,9 +52,10 @@ public class Remote implements ApiAccess {
             return;
 
         retrofit = new Retrofit.Builder()
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .baseUrl("http://" + serverAddress + "/api/v1/")
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .client(okHttpClient)
                 .build();
 
         crustService = retrofit.create(CrustServiceAPI.class);
