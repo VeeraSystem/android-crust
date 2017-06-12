@@ -16,18 +16,17 @@
 
 package com.veerasystem.crust;
 
-interface CrustContractor {
+import android.app.Application;
 
-    interface View extends BaseView<Presenter> {
+import com.facebook.stetho.Stetho;
 
-        void showLoginPage();
+public class CrustApplication extends Application {
 
-        String getToken();
-    }
+    @Override
+    public void onCreate() {
+        super.onCreate();
 
-    interface Presenter extends BasePresenter {
-
-        void signOut();
-
+        if (BuildConfig.DEBUG)
+            Stetho.initializeWithDefaults(this);
     }
 }

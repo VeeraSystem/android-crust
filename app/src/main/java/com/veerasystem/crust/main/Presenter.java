@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.veerasystem.crust;
+package com.veerasystem.crust.main;
 
 import com.veerasystem.crust.data.source.remote.Remote;
 

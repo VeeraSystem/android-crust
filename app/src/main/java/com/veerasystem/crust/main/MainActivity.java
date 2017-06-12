@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.veerasystem.crust;
+package com.veerasystem.crust.main;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -34,6 +34,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.veerasystem.crust.R;
 import com.veerasystem.crust.dashboard.DashboardFragment;
 import com.veerasystem.crust.dashboard.DashboardPresenter;
 import com.veerasystem.crust.data.source.remote.Remote;

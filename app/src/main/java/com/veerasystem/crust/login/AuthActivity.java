@@ -20,7 +20,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.veerasystem.crust.MainActivity;
+import com.veerasystem.crust.main.MainActivity;
 import com.veerasystem.crust.R;
 import com.veerasystem.crust.data.source.remote.Remote;
 import com.veerasystem.crust.utils.ActivityUtils;

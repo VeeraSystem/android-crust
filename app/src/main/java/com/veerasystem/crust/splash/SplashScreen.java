@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.veerasystem.crust;
+package com.veerasystem.crust.splash;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import com.veerasystem.crust.R;
 import com.veerasystem.crust.login.AuthActivity;
 
 import butterknife.BindView;
