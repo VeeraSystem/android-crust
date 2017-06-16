@@ -49,10 +49,11 @@ dependencies {
     compile "io.reactivex:rxandroid:$rootProject.rxAndroidLibVersion"
 
     // Butterknife
-    compile 'com.jakewharton:butterknife:8.6.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
+    compile "com.jakewharton:butterknife:$rootProject.butterknifeLibVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterknifeLibVersion"
 
     // Facebook Stetho for Debugging
-    compile 'com.facebook.stetho:stetho:1.5.0'
-    compile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+    compile "com.facebook.stetho:stetho:$rootProject.stethoLibVersion"
+    compile "com.facebook.stetho:stetho-okhttp3:$rootProject.stethoLibVersion"
+
 }

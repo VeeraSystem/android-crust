@@ -29,7 +29,9 @@ ext {
     buildToolsVersion = "25.0.2"
 
     supportLibVersion = '25.3.1'
-    retrofitLibVersion = '2.2.0'
+    retrofitLibVersion = '2.3.0'
     rxJavaLibVersion = '1.0.14'
     rxAndroidLibVersion = '1.0.1'
+    butterknifeLibVersion = '8.6.0'
+    stethoLibVersion = '1.5.0'
 }
