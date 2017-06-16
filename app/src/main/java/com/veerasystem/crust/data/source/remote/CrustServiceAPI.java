@@ -16,6 +16,16 @@
 
 package com.veerasystem.crust.data.source.remote;
 
+import com.veerasystem.crust.data.ActiveConnectionModel;
+import com.veerasystem.crust.data.ActiveSessionModel;
+import com.veerasystem.crust.data.FailedConnectionModel;
+import com.veerasystem.crust.data.FailedSessionModel;
+import com.veerasystem.crust.data.RemoteUsersModel;
+import com.veerasystem.crust.data.ServerAccountModel;
+import com.veerasystem.crust.data.ServerCountModel;
+import com.veerasystem.crust.data.ServerGroupCountModel;
+import com.veerasystem.crust.data.TokenModel;
+
 import java.util.HashMap;
 
 import okhttp3.ResponseBody;
@@ -26,7 +36,6 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
-import retrofit2.http.Url;
 import rx.Observable;
 
 interface CrustServiceAPI {
@@ -40,7 +49,7 @@ interface CrustServiceAPI {
 
     @FormUrlEncoded
     @POST("auth/otptoken/")
-    Observable<ResponseBody> login(
+    Observable<TokenModel> login(
             @Field("username") String username,
             @Field("password") String password,
             @Field("otp") String otp
@@ -52,7 +61,7 @@ interface CrustServiceAPI {
     );
 
     @GET("remoteconnections/")
-    Observable<ResponseBody> activeConnections(
+    Observable<ActiveConnectionModel> activeConnections(
             @Header("Authorization") String token,
             @Query("active") int active,
             @Query("page") int page,
@@ -60,12 +69,12 @@ interface CrustServiceAPI {
     );
 
     @GET("remoteconnections/usersfailcount/")
-    Observable<ResponseBody> failedConnections(
+    Observable<FailedConnectionModel> failedConnections(
             @Header("Authorization") String token
     );
 
     @GET("crustsessions/")
-    Observable<ResponseBody> activeSessions(
+    Observable<ActiveSessionModel> activeSessions(
             @Header("Authorization") String token,
             @Query("active") int active,
             @Query("page") int page,
@@ -73,34 +82,34 @@ interface CrustServiceAPI {
     );
 
     @GET("crustsessions/")
-    Observable<ResponseBody> filterActiveSessions(
+    Observable<ActiveSessionModel> filterActiveSessions(
             @Header("Authorization") String token,
             @Query("active") int active,
             @QueryMap HashMap<String, String> parameters
     );
 
     @GET("crustsessions/usersfailcount/")
-    Observable<ResponseBody> failedSessions(
+    Observable<FailedSessionModel> failedSessions(
             @Header("Authorization") String token
     );
 
     @GET("serveraccounts/count/")
-    Observable<ResponseBody> getServerAccountCount(
+    Observable<ServerAccountModel> getServerAccountCount(
             @Header("Authorization") String token
     );
 
     @GET("servers/count/")
-    Observable<ResponseBody> getServerCount(
+    Observable<ServerCountModel> getServerCount(
             @Header("Authorization") String token
     );
 
     @GET("servergroups/count/")
-    Observable<ResponseBody> getServerGroupCount(
+    Observable<ServerGroupCountModel> getServerGroupCount(
             @Header("Authorization") String token
     );
 
     @GET("remoteusers/count/")
-    Observable<ResponseBody> getRemoteUserCount(
+    Observable<RemoteUsersModel> getRemoteUserCount(
             @Header("Authorization") String token
     );
 

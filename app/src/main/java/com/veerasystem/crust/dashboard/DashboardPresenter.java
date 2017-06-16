@@ -18,16 +18,12 @@ package com.veerasystem.crust.dashboard;
 
 import android.util.Log;
 
-import com.google.gson.Gson;
 import com.veerasystem.crust.data.RemoteUsersModel;
 import com.veerasystem.crust.data.ServerAccountModel;
 import com.veerasystem.crust.data.ServerCountModel;
 import com.veerasystem.crust.data.ServerGroupCountModel;
 import com.veerasystem.crust.data.source.remote.Remote;
 
-import java.io.IOException;
-
-import okhttp3.ResponseBody;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -40,8 +36,6 @@ public class DashboardPresenter implements DashboardContract.Presenter {
     private Remote remote;
     private DashboardContract.View view;
 
-    private Gson gson;
-
     @Override
     public void start() {
         loadRemoteUserCount();
@@ -51,7 +45,6 @@ public class DashboardPresenter implements DashboardContract.Presenter {
     }
 
     public DashboardPresenter(Remote remote, DashboardContract.View view) {
-        gson = new Gson();
         this.remote = remote;
         this.view = view;
 
@@ -60,10 +53,10 @@ public class DashboardPresenter implements DashboardContract.Presenter {
 
     @Override
     public void loadServerGroupCount() {
-        Observable<ResponseBody> serverGroupCount = remote.getServerGroupCount(view.getToken());
+        Observable<ServerGroupCountModel> serverGroupCount = remote.getServerGroupCount(view.getToken());
         serverGroupCount.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<ResponseBody>() {
+                .subscribe(new Subscriber<ServerGroupCountModel>() {
                     @Override
                     public void onCompleted() {
 
@@ -75,27 +68,21 @@ public class DashboardPresenter implements DashboardContract.Presenter {
                     }
 
                     @Override
-                    public void onNext(ResponseBody responseBody) {
-                        try {
-                            ServerGroupCountModel serverGroupCountModel = gson.fromJson(responseBody.string(), ServerGroupCountModel.class);
-
-                            int count;
-                            count = serverGroupCountModel.getCount();
-                            Log.d("ServerGroupCount", String.valueOf(count));
-                            view.showServerGroupsCount(String.valueOf(count));
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                    public void onNext(ServerGroupCountModel serverGroupCountModel) {
+                        int count;
+                        count = serverGroupCountModel.getCount();
+                        Log.d("ServerGroupCount", String.valueOf(count));
+                        view.showServerGroupsCount(String.valueOf(count));
                     }
                 });
     }
 
     @Override
     public void loadServerCount() {
-        Observable<ResponseBody> serverCount = remote.getServerCount(view.getToken());
+        Observable<ServerCountModel> serverCount = remote.getServerCount(view.getToken());
         serverCount.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<ResponseBody>() {
+                .subscribe(new Subscriber<ServerCountModel>() {
                     @Override
                     public void onCompleted() {
 
@@ -107,26 +94,20 @@ public class DashboardPresenter implements DashboardContract.Presenter {
                     }
 
                     @Override
-                    public void onNext(ResponseBody responseBody) {
-                        try {
-                            ServerCountModel serverCountModel = gson.fromJson(responseBody.string(), ServerCountModel.class);
-
-                            int count;
-                            count = serverCountModel.getCount();
-                            view.showServerCount(String.valueOf(count));
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                    public void onNext(ServerCountModel serverCountModel) {
+                        int count;
+                        count = serverCountModel.getCount();
+                        view.showServerCount(String.valueOf(count));
                     }
                 });
     }
 
     @Override
     public void loadServerAccountCount() {
-        Observable<ResponseBody> serverAccountCount = remote.getServerAccountCount(view.getToken());
+        Observable<ServerAccountModel> serverAccountCount = remote.getServerAccountCount(view.getToken());
         serverAccountCount.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<ResponseBody>() {
+                .subscribe(new Subscriber<ServerAccountModel>() {
                     @Override
                     public void onCompleted() {
 
@@ -138,26 +119,20 @@ public class DashboardPresenter implements DashboardContract.Presenter {
                     }
 
                     @Override
-                    public void onNext(ResponseBody responseBody) {
-                        try {
-                            ServerAccountModel serverAccountModel = gson.fromJson(responseBody.string(), ServerAccountModel.class);
-
-                            int count;
-                            count = serverAccountModel.getCount();
-                            view.showServerAccountsCount(String.valueOf(count));
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                    public void onNext(ServerAccountModel serverAccountModel) {
+                        int count;
+                        count = serverAccountModel.getCount();
+                        view.showServerAccountsCount(String.valueOf(count));
                     }
                 });
     }
 
     @Override
     public void loadRemoteUserCount() {
-        Observable<ResponseBody> remoteUserCount = remote.getRemoteUsersCount(view.getToken());
+        Observable<RemoteUsersModel> remoteUserCount = remote.getRemoteUsersCount(view.getToken());
         remoteUserCount.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<ResponseBody>() {
+                .subscribe(new Subscriber<RemoteUsersModel>() {
                     @Override
                     public void onCompleted() {
 
@@ -169,16 +144,10 @@ public class DashboardPresenter implements DashboardContract.Presenter {
                     }
 
                     @Override
-                    public void onNext(ResponseBody responseBody) {
-                        try {
-                            RemoteUsersModel remoteUsersModel = gson.fromJson(responseBody.string(), RemoteUsersModel.class);
-
-                            int count;
-                            count = remoteUsersModel.getCount();
-                            view.showRemoteUsersCount(String.valueOf(count));
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                    public void onNext(RemoteUsersModel remoteUsersModel) {
+                        int count;
+                        count = remoteUsersModel.getCount();
+                        view.showRemoteUsersCount(String.valueOf(count));
                     }
                 });
     }

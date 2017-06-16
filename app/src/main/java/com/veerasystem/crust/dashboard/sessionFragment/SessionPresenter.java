@@ -16,14 +16,10 @@
 
 package com.veerasystem.crust.dashboard.sessionFragment;
 
-import android.util.Log;
-
-import com.google.gson.Gson;
 import com.veerasystem.crust.data.ActiveSessionModel;
 import com.veerasystem.crust.data.FailedSessionModel;
 import com.veerasystem.crust.data.source.remote.Remote;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -49,10 +45,10 @@ public class SessionPresenter implements SessionContract.Presenter {
 
     @Override
     public void loadActiveList() {
-        Observable<ResponseBody> activeSessionList = remote.getActiveSessions(view.getToken(), 1, 1, 10);
+        Observable<ActiveSessionModel> activeSessionList = remote.getActiveSessions(view.getToken(), 1, 1, 10);
         activeSessionList.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<ResponseBody>() {
+                .subscribe(new Subscriber<ActiveSessionModel>() {
                     @Override
                     public void onCompleted() {
 
@@ -64,27 +60,21 @@ public class SessionPresenter implements SessionContract.Presenter {
                     }
 
                     @Override
-                    public void onNext(ResponseBody responseBody) {
-                        try {
-                            Gson gson = new Gson();
-                            ActiveSessionModel activeSessionModel = gson.fromJson(responseBody.string(), ActiveSessionModel.class);
-                            List<ActiveSessionModel.Result> itemsData;
-                            itemsData = activeSessionModel.getsResult();
+                    public void onNext(ActiveSessionModel activeSessionModel) {
+                        List<ActiveSessionModel.Result> itemsData;
+                        itemsData = activeSessionModel.getsResult();
 
-                            view.showActiveList(itemsData);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        view.showActiveList(itemsData);
                     }
                 });
     }
 
     @Override
     public void loadFailedList() {
-        Observable<ResponseBody> failedSessionList = remote.getFailedSessions(view.getToken());
+        Observable<FailedSessionModel> failedSessionList = remote.getFailedSessions(view.getToken());
         failedSessionList.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<ResponseBody>() {
+                .subscribe(new Subscriber<FailedSessionModel>() {
                     @Override
                     public void onCompleted() {
 
@@ -96,19 +86,11 @@ public class SessionPresenter implements SessionContract.Presenter {
                     }
 
                     @Override
-                    public void onNext(ResponseBody responseBody) {
-                        try {
-                            String response = responseBody.string();
-                            Log.i(TAG, "onNext:Failed Sessions: " + response);
-                            Gson gson = new Gson();
-                            FailedSessionModel failedSessionModel = gson.fromJson(response, FailedSessionModel.class);
-                            List<FailedSessionModel.SessionFailCount> itemsData;
-                            itemsData = failedSessionModel.getSessionFailCounts();
+                    public void onNext(FailedSessionModel failedSessionModel) {
+                        List<FailedSessionModel.SessionFailCount> itemsData;
+                        itemsData = failedSessionModel.getSessionFailCounts();
 
-                            view.showFailedList(itemsData);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        view.showFailedList(itemsData);
                     }
                 });
     }
@@ -124,10 +106,10 @@ public class SessionPresenter implements SessionContract.Presenter {
         if (!server.isEmpty())
             parameters.put("server", server);
 
-        Observable<ResponseBody> activeSessionList = remote.getFilterActiveSessions(view.getToken(), 1, parameters);
+        Observable<ActiveSessionModel> activeSessionList = remote.getFilterActiveSessions(view.getToken(), 1, parameters);
         activeSessionList.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<ResponseBody>() {
+                .subscribe(new Subscriber<ActiveSessionModel>() {
                     @Override
                     public void onCompleted() {
 
@@ -139,17 +121,11 @@ public class SessionPresenter implements SessionContract.Presenter {
                     }
 
                     @Override
-                    public void onNext(ResponseBody responseBody) {
-                        try {
-                            Gson gson = new Gson();
-                            ActiveSessionModel activeSessionModel = gson.fromJson(responseBody.string(), ActiveSessionModel.class);
-                            List<ActiveSessionModel.Result> itemsData;
-                            itemsData = activeSessionModel.getsResult();
+                    public void onNext(ActiveSessionModel activeSessionModel) {
+                        List<ActiveSessionModel.Result> itemsData;
+                        itemsData = activeSessionModel.getsResult();
 
-                            view.showActiveList(itemsData);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        view.showActiveList(itemsData);
                     }
                 });
     }

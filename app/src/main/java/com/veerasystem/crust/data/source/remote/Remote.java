@@ -17,6 +17,15 @@
 package com.veerasystem.crust.data.source.remote;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
+import com.veerasystem.crust.data.ActiveConnectionModel;
+import com.veerasystem.crust.data.ActiveSessionModel;
+import com.veerasystem.crust.data.FailedConnectionModel;
+import com.veerasystem.crust.data.FailedSessionModel;
+import com.veerasystem.crust.data.RemoteUsersModel;
+import com.veerasystem.crust.data.ServerAccountModel;
+import com.veerasystem.crust.data.ServerCountModel;
+import com.veerasystem.crust.data.ServerGroupCountModel;
+import com.veerasystem.crust.data.TokenModel;
 import com.veerasystem.crust.data.source.ApiAccess;
 
 import java.util.HashMap;
@@ -71,7 +80,7 @@ public class Remote implements ApiAccess {
     }
 
     @Override
-    public Observable<ResponseBody> login(String username, String password, String otp) {
+    public Observable<TokenModel> login(String username, String password, String otp) {
         return crustService.login(username, password, otp);
     }
 
@@ -81,47 +90,47 @@ public class Remote implements ApiAccess {
     }
 
     @Override
-    public Observable<ResponseBody> getServerAccountCount(String tokenID) {
+    public Observable<ServerAccountModel> getServerAccountCount(String tokenID) {
         return crustService.getServerAccountCount(tokenID);
     }
 
     @Override
-    public Observable<ResponseBody> getServerGroupCount(String tokenID) {
+    public Observable<ServerGroupCountModel> getServerGroupCount(String tokenID) {
         return crustService.getServerGroupCount(tokenID);
     }
 
     @Override
-    public Observable<ResponseBody> getServerCount(String tokenID) {
+    public Observable<ServerCountModel> getServerCount(String tokenID) {
         return crustService.getServerCount(tokenID);
     }
 
     @Override
-    public Observable<ResponseBody> getRemoteUsersCount(String tokenID) {
+    public Observable<RemoteUsersModel> getRemoteUsersCount(String tokenID) {
         return crustService.getRemoteUserCount(tokenID);
     }
 
     @Override
-    public Observable<ResponseBody> getActiveConnections(String tokenID, int active, int page, int pageSize) {
+    public Observable<ActiveConnectionModel> getActiveConnections(String tokenID, int active, int page, int pageSize) {
         return crustService.activeConnections(tokenID, active, page, pageSize);
     }
 
     @Override
-    public Observable<ResponseBody> getFailedConnections(String tokenID) {
+    public Observable<FailedConnectionModel> getFailedConnections(String tokenID) {
         return crustService.failedConnections(tokenID);
     }
 
     @Override
-    public Observable<ResponseBody> getActiveSessions(String tokenID, int active, int page, int pageSize) {
+    public Observable<ActiveSessionModel> getActiveSessions(String tokenID, int active, int page, int pageSize) {
         return crustService.activeSessions(tokenID, active, page, pageSize);
     }
 
     @Override
-    public Observable<ResponseBody> getFailedSessions(String tokenID) {
+    public Observable<FailedSessionModel> getFailedSessions(String tokenID) {
         return crustService.failedSessions(tokenID);
     }
 
     @Override
-    public Observable<ResponseBody> getFilterActiveSessions(String tokenID, int active, HashMap<String, String> parameters) {
+    public Observable<ActiveSessionModel> getFilterActiveSessions(String tokenID, int active, HashMap<String, String> parameters) {
         return crustService.filterActiveSessions(tokenID, active, parameters);
     }
 

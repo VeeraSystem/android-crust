@@ -18,15 +18,12 @@ package com.veerasystem.crust.dashboard.connectionFragment;
 
 import android.util.Log;
 
-import com.google.gson.Gson;
 import com.veerasystem.crust.data.ActiveConnectionModel;
 import com.veerasystem.crust.data.FailedConnectionModel;
 import com.veerasystem.crust.data.source.remote.Remote;
 
-import java.io.IOException;
 import java.util.List;
 
-import okhttp3.ResponseBody;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -54,10 +51,10 @@ public class ConnectionPresenter implements ConnectionContract.Presenter {
 
     @Override
     public void loadActiveList() {
-        Observable<ResponseBody> activeConnectionList = remote.getActiveConnections(view.getToken(), 1, 1, 10);
+        Observable<ActiveConnectionModel> activeConnectionList = remote.getActiveConnections(view.getToken(), 1, 1, 10);
         activeConnectionList.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<ResponseBody>() {
+                .subscribe(new Subscriber<ActiveConnectionModel>() {
                     @Override
                     public void onCompleted() {
                         Log.i(TAG, "onCompleted: ");
@@ -69,29 +66,21 @@ public class ConnectionPresenter implements ConnectionContract.Presenter {
                     }
 
                     @Override
-                    public void onNext(ResponseBody responseBody) {
-                        try {
-                            String response = responseBody.string();
-                            Log.i(TAG, "onNext: " + response);
-                            Gson gson = new Gson();
-                            ActiveConnectionModel activeConnectionModel = gson.fromJson(response, ActiveConnectionModel.class);
-                            List<ActiveConnectionModel.Result> itemsData;
-                            itemsData = activeConnectionModel.getsResult();
+                    public void onNext(ActiveConnectionModel activeConnectionModel) {
+                        List<ActiveConnectionModel.Result> itemsData;
+                        itemsData = activeConnectionModel.getsResult();
 
-                            view.showActiveList(itemsData);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        view.showActiveList(itemsData);
                     }
                 });
     }
 
     @Override
     public void loadFailedList() {
-        Observable<ResponseBody> failedConnectionList = remote.getFailedConnections(view.getToken());
+        Observable<FailedConnectionModel> failedConnectionList = remote.getFailedConnections(view.getToken());
         failedConnectionList.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<ResponseBody>() {
+                .subscribe(new Subscriber<FailedConnectionModel>() {
                     @Override
                     public void onCompleted() {
                         Log.i(TAG, "onCompleted: ");
@@ -103,17 +92,11 @@ public class ConnectionPresenter implements ConnectionContract.Presenter {
                     }
 
                     @Override
-                    public void onNext(ResponseBody responseBody) {
-                        try {
-                            Gson gson = new Gson();
-                            FailedConnectionModel failedConnectionModel = gson.fromJson(responseBody.string(), FailedConnectionModel.class);
-                            List<FailedConnectionModel.UsersFailCount> itemsData;
-                            itemsData = failedConnectionModel.getUsersFailCounts();
+                    public void onNext(FailedConnectionModel failedConnectionModel) {
+                        List<FailedConnectionModel.UsersFailCount> itemsData;
+                        itemsData = failedConnectionModel.getUsersFailCounts();
 
-                            view.showFailedList(itemsData);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        view.showFailedList(itemsData);
                     }
                 });
     }

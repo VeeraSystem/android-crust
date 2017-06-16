@@ -23,7 +23,6 @@ import com.veerasystem.crust.data.source.remote.Remote;
 
 import java.io.IOException;
 
-import okhttp3.ResponseBody;
 import retrofit2.HttpException;
 import rx.Observable;
 import rx.Subscriber;
@@ -47,10 +46,10 @@ class OtpPresenter implements OtpContract.Presenter {
 
         view.showProgressIndicator(true);
 
-        Observable<ResponseBody> loginResponse = remote.login(username, password, otp);
+        Observable<TokenModel> loginResponse = remote.login(username, password, otp);
         loginResponse.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<ResponseBody>() {
+                .subscribe(new Subscriber<TokenModel>() {
                     @Override
                     public void onCompleted() {
                         view.showProgressIndicator(false);
@@ -77,15 +76,8 @@ class OtpPresenter implements OtpContract.Presenter {
                     }
 
                     @Override
-                    public void onNext(ResponseBody responseBody) {
-
-                        try {
-                            Gson gson = new Gson();
-                            TokenModel model = gson.fromJson(responseBody.string(), TokenModel.class);
-                            view.storeUserDetail(username, model.getToken(), remote.currentServerAddress());
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                    public void onNext(TokenModel model) {
+                        view.storeUserDetail(username, model.getToken(), remote.currentServerAddress());
                     }
                 });
     }

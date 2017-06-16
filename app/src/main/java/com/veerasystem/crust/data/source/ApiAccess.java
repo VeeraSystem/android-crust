@@ -16,6 +16,16 @@
 
 package com.veerasystem.crust.data.source;
 
+import com.veerasystem.crust.data.ActiveConnectionModel;
+import com.veerasystem.crust.data.ActiveSessionModel;
+import com.veerasystem.crust.data.FailedConnectionModel;
+import com.veerasystem.crust.data.FailedSessionModel;
+import com.veerasystem.crust.data.RemoteUsersModel;
+import com.veerasystem.crust.data.ServerAccountModel;
+import com.veerasystem.crust.data.ServerCountModel;
+import com.veerasystem.crust.data.ServerGroupCountModel;
+import com.veerasystem.crust.data.TokenModel;
+
 import java.util.HashMap;
 
 import okhttp3.ResponseBody;
@@ -26,27 +36,27 @@ public interface ApiAccess {
 
     Observable<ResponseBody> getOtp(String username, String password);
 
-    Observable<ResponseBody> login(String username, String password, String otp);
+    Observable<TokenModel> login(String username, String password, String otp);
 
     Observable<ResponseBody> logout(String token);
 
-    Observable<ResponseBody> getServerAccountCount(String tokenID);
+    Observable<ServerAccountModel> getServerAccountCount(String tokenID);
 
-    Observable<ResponseBody> getServerGroupCount(String tokenID);
+    Observable<ServerGroupCountModel> getServerGroupCount(String tokenID);
 
-    Observable<ResponseBody> getServerCount(String tokenID);
+    Observable<ServerCountModel> getServerCount(String tokenID);
 
-    Observable<ResponseBody> getRemoteUsersCount(String tokenID);
+    Observable<RemoteUsersModel> getRemoteUsersCount(String tokenID);
 
-    Observable<ResponseBody> getActiveConnections(String tokenID, int active, int page, int pageSize);
+    Observable<ActiveConnectionModel> getActiveConnections(String tokenID, int active, int page, int pageSize);
 
-    Observable<ResponseBody> getFailedConnections(String tokenID);
+    Observable<FailedConnectionModel> getFailedConnections(String tokenID);
 
-    Observable<ResponseBody> getActiveSessions(String tokenID, int active, int page, int pageSize);
+    Observable<ActiveSessionModel> getActiveSessions(String tokenID, int active, int page, int pageSize);
 
-    Observable<ResponseBody> getFailedSessions(String tokenID);
+    Observable<FailedSessionModel> getFailedSessions(String tokenID);
 
-    Observable<ResponseBody> getFilterActiveSessions(String tokenID, int active, HashMap<String, String> parameters);
+    Observable<ActiveSessionModel> getFilterActiveSessions(String tokenID, int active, HashMap<String, String> parameters);
 
     Observable<ResponseBody> killSession(String tokenID, int sessionID);
 
