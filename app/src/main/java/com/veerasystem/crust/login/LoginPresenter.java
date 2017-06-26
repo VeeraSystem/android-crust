@@ -25,6 +25,8 @@ import com.veerasystem.crust.data.source.remote.Remote;
 import java.io.IOException;
 import java.net.SocketTimeoutException;
 
+import javax.inject.Inject;
+
 import okhttp3.ResponseBody;
 import retrofit2.HttpException;
 import rx.Observable;
@@ -40,6 +42,7 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     private Subscription remoteSub;
 
+    @Inject
     public LoginPresenter(Remote remote, LoginContract.View view) {
         this.remote = remote;
         this.view = view;

@@ -34,11 +34,15 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.veerasystem.crust.CrustApplication;
 import com.veerasystem.crust.R;
 import com.veerasystem.crust.dashboard.DashboardFragment;
 import com.veerasystem.crust.dashboard.DashboardPresenter;
+import com.veerasystem.crust.dashboard.DashboardPresenterModule;
 import com.veerasystem.crust.data.source.remote.Remote;
 import com.veerasystem.crust.utils.ActivityUtils;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,7 +50,14 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity
         implements CrustContractor.View, NavigationView.OnNavigationItemSelectedListener {
 
-    private CrustContractor.Presenter presenter;
+    @Inject
+    Remote remote;
+
+    @Inject
+    Presenter presenter;
+
+    @Inject
+    DashboardPresenter dashboardPresenter;
 
     private TextView headerUserInfoTextView;
 
@@ -67,7 +78,8 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void setPresenter(CrustContractor.Presenter presenter) {
-        this.presenter = presenter;
+        //FIXME remove
+        /*this.presenter = presenter;*/
     }
 
     @Override
@@ -75,6 +87,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+
         ButterKnife.bind(this);
 
         fragmentManager = getSupportFragmentManager();
@@ -85,17 +98,19 @@ public class MainActivity extends AppCompatActivity
             ActivityUtils.addFragmentToActivity(fragmentManager, dashboardFragment, R.id.contentFrame);
         }
 
+        DaggerMainComponent.builder()
+                .remoteComponent(((CrustApplication)getApplication()).getComponent())
+                .mainPresenterModule(new MainPresenterModule(this))
+                .dashboardPresenterModule(new DashboardPresenterModule(dashboardFragment)).build()
+                .inject(this);
 
         //Load From Database
         SharedPreferences pref = getSharedPreferences("CRUST", 0);
         String username = pref.getString("Username", "");
         String serverAddress = pref.getString("SERVERADDRESS", null);
 
-        Remote remote = Remote.getINSTANCE();
         if (serverAddress != null)
             remote.setup(serverAddress);
-
-        new DashboardPresenter(remote, dashboardFragment);
 
         setSupportActionBar(toolbar);
 
@@ -111,8 +126,6 @@ public class MainActivity extends AppCompatActivity
         headerUserInfoTextView.setText(username);
 
         navigationView.setNavigationItemSelectedListener(this);
-
-        new Presenter(remote, this);
 
         signout.setOnClickListener(new View.OnClickListener() {
             @Override

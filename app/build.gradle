@@ -44,6 +44,12 @@ dependencies {
     compile "com.squareup.retrofit2:retrofit-converters:$rootProject.ext.retrofitLibVersion"
     compile "com.squareup.retrofit2:adapter-rxjava:$rootProject.ext.retrofitLibVersion"
 
+    // Dagger2
+    compile "com.google.dagger:dagger:$rootProject.ext.daggerLibVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.ext.daggerLibVersion"
+    provided 'javax.annotation:jsr250-api:1.0'
+    compile 'javax.inject:javax.inject:1'
+
     // RxJava
     compile "io.reactivex:rxjava:$rootProject.rxJavaLibVersion"
     compile "io.reactivex:rxandroid:$rootProject.rxAndroidLibVersion"

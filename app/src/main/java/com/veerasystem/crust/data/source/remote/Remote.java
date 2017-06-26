@@ -30,6 +30,8 @@ import com.veerasystem.crust.data.source.ApiAccess;
 
 import java.util.HashMap;
 
+import javax.inject.Singleton;
+
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
@@ -37,20 +39,21 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
 
+@Singleton
 public class Remote implements ApiAccess {
 
     private static Remote INSTANCE = null;
     private static Retrofit retrofit;
     private static OkHttpClient okHttpClient;
     private CrustServiceAPI crustService;
-
+//
     public static Remote getINSTANCE() {
         if (INSTANCE == null)
             INSTANCE = new Remote();
         return INSTANCE;
     }
 
-    private Remote() {
+    public Remote() {
         okHttpClient = new OkHttpClient.Builder()
                 .addNetworkInterceptor(new StethoInterceptor())
                 .build();

@@ -24,6 +24,8 @@ import com.veerasystem.crust.data.source.remote.Remote;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -36,6 +38,7 @@ public class ConnectionPresenter implements ConnectionContract.Presenter {
     private ConnectionContract.View view;
     private Remote remote;
 
+    @Inject
     public ConnectionPresenter(Remote remote, ConnectionContract.View view) {
         this.remote = remote;
         this.view = view;

@@ -23,6 +23,8 @@ import com.veerasystem.crust.data.source.remote.Remote;
 
 import java.io.IOException;
 
+import javax.inject.Inject;
+
 import retrofit2.HttpException;
 import rx.Observable;
 import rx.Subscriber;
@@ -34,6 +36,7 @@ class OtpPresenter implements OtpContract.Presenter {
     OtpContract.View view;
     Remote remote;
 
+    @Inject
     OtpPresenter(Remote remote, OtpContract.View view) {
         this.remote = remote;
         this.view = view;

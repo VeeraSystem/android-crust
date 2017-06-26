@@ -23,6 +23,8 @@ import com.veerasystem.crust.data.source.remote.Remote;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import okhttp3.ResponseBody;
 import rx.Observable;
 import rx.Subscriber;
@@ -36,6 +38,7 @@ public class SessionPresenter implements SessionContract.Presenter {
     private SessionContract.View view;
     private Remote remote;
 
+    @Inject
     public SessionPresenter(Remote remote, SessionContract.View view) {
         this.remote = remote;
         this.view = view;

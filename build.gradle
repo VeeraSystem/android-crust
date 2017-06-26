@@ -34,4 +34,5 @@ ext {
     rxAndroidLibVersion = '1.0.1'
     butterknifeLibVersion = '8.6.0'
     stethoLibVersion = '1.5.0'
+    daggerLibVersion = '2.11'
 }

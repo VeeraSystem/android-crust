@@ -18,6 +18,8 @@ package com.veerasystem.crust.main;
 
 import com.veerasystem.crust.data.source.remote.Remote;
 
+import javax.inject.Inject;
+
 import okhttp3.ResponseBody;
 import rx.Observable;
 import rx.Subscriber;
@@ -30,6 +32,7 @@ public class Presenter implements CrustContractor.Presenter {
     private Remote remote;
     private CrustContractor.View view;
 
+    @Inject
     Presenter(Remote remote, CrustContractor.View view) {
         this.remote = remote;
         this.view = view;

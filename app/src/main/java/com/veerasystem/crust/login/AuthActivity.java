@@ -20,14 +20,26 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.veerasystem.crust.main.MainActivity;
+import com.veerasystem.crust.CrustApplication;
 import com.veerasystem.crust.R;
 import com.veerasystem.crust.data.source.remote.Remote;
+import com.veerasystem.crust.main.MainActivity;
 import com.veerasystem.crust.utils.ActivityUtils;
+
+import javax.inject.Inject;
 
 public class AuthActivity extends AppCompatActivity {
 
     private static final String TAG = "AuthActivity";
+
+    @Inject
+    Remote remote;
+
+    @Inject
+    LoginPresenter loginPresenter;
+
+    @Inject
+    OtpPresenter otpPresenter;
 
     LoginFragment loginFragment;
     OtpFragment otpFragment;
@@ -48,6 +60,13 @@ public class AuthActivity extends AppCompatActivity {
             otpFragment = OtpFragment.newInstance();
         }
 
+        DaggerAuthComponent.builder()
+                .remoteComponent(((CrustApplication) getApplication()).getComponent())
+                .loginPresenterModule(new LoginPresenterModule(loginFragment))
+                .otpPresenterModule(new OtpPresenterModule(otpFragment)).build()
+                .inject(this);
+
+
         loginFragment.setFragmentListener(new LoginFragment.FragmentListener() {
             @Override
             public void loadOtpPage(Bundle values) {
@@ -67,11 +86,6 @@ public class AuthActivity extends AppCompatActivity {
             }
         });
 
-        Remote remote = Remote.getINSTANCE();
-
-        new LoginPresenter(remote, loginFragment);
-
-        new OtpPresenter(remote, otpFragment);
     }
 
     private void showMainActivity() {

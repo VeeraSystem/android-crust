@@ -24,6 +24,8 @@ import com.veerasystem.crust.data.ServerCountModel;
 import com.veerasystem.crust.data.ServerGroupCountModel;
 import com.veerasystem.crust.data.source.remote.Remote;
 
+import javax.inject.Inject;
+
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -44,6 +46,7 @@ public class DashboardPresenter implements DashboardContract.Presenter {
         loadServerGroupCount();
     }
 
+    @Inject
     public DashboardPresenter(Remote remote, DashboardContract.View view) {
         this.remote = remote;
         this.view = view;

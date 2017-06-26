@@ -31,15 +31,20 @@ import android.view.ViewGroup;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.veerasystem.crust.CrustApplication;
 import com.veerasystem.crust.R;
 import com.veerasystem.crust.dashboard.connectionFragment.ConnectionFragment;
 import com.veerasystem.crust.dashboard.connectionFragment.ConnectionPresenter;
+import com.veerasystem.crust.dashboard.connectionFragment.ConnectionPresenterModule;
 import com.veerasystem.crust.dashboard.sessionFragment.SessionFragment;
 import com.veerasystem.crust.dashboard.sessionFragment.SessionPresenter;
+import com.veerasystem.crust.dashboard.sessionFragment.SessionPresenterModule;
 import com.veerasystem.crust.data.source.remote.Remote;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,6 +54,15 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
     private static final String TAG = "DashboardFragment";
 
     private DashboardContract.Presenter presenter;
+
+    @Inject
+    Remote remote;
+
+    @Inject
+    ConnectionPresenter connectionPresenter;
+
+    @Inject
+    SessionPresenter sessionPresenter;
 
     @BindView(R.id.serverGroupsCountButton)
     TextView lblServerGroupsCount;
@@ -68,7 +82,6 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
 
     private ConnectionFragment connectionFragment;
     private SessionFragment sessionFragment;
-
 
     private TextView headerUserInfoTextView;
 
@@ -115,16 +128,19 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
         if (connectionFragment == null)
             connectionFragment = ConnectionFragment.newInstance();
 
-        Remote remote = Remote.getINSTANCE();
-        if (serverAddress != null)
-            remote.setup(serverAddress);
-
-        new ConnectionPresenter(remote, connectionFragment);
-
         if (sessionFragment == null)
             sessionFragment = SessionFragment.newInstance();
 
-        new SessionPresenter(remote, sessionFragment);
+
+        DaggerDashboardComponent.builder()
+                .remoteComponent(((CrustApplication) getActivity().getApplication()).getComponent())
+                .connectionPresenterModule(new ConnectionPresenterModule(connectionFragment))
+                .sessionPresenterModule(new SessionPresenterModule(sessionFragment))
+                .build()
+                .inject(this);
+
+        if (serverAddress != null)
+            remote.setup(serverAddress);
 
         setupViewPager(viewPager);
 

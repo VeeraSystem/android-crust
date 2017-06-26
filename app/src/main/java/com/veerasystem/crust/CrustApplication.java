@@ -19,8 +19,13 @@ package com.veerasystem.crust;
 import android.app.Application;
 
 import com.facebook.stetho.Stetho;
+import com.veerasystem.crust.data.source.DaggerRemoteComponent;
+import com.veerasystem.crust.data.source.RemoteComponent;
+import com.veerasystem.crust.data.source.RemoteDataSourceModule;
 
 public class CrustApplication extends Application {
+
+    private RemoteComponent mComponent;
 
     @Override
     public void onCreate() {
@@ -28,5 +33,14 @@ public class CrustApplication extends Application {
 
         if (BuildConfig.DEBUG)
             Stetho.initializeWithDefaults(this);
+
+        mComponent = DaggerRemoteComponent.builder()
+                .remoteDataSourceModule(new RemoteDataSourceModule())
+                .build();
+
+    }
+
+    public RemoteComponent getComponent() {
+        return mComponent;
     }
 }
